@@ -1,7 +1,7 @@
 ﻿using System.Transactions; // not sure how to use this 
 using Message_project;
 
-
+// LOGS!!!!!!!! + dependency inj nlog lib
 class Program
 {
     static void Main(string[] args)
@@ -27,7 +27,7 @@ class Program
             }
             else if (PhoneNumber.isValid(inputedText))
             {
-                enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedText }).ToArray();
+                enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedText }).ToArray(); // creates a new array and adds to it 
             }
             else
             {
@@ -44,8 +44,8 @@ class Program
         //asking for sending email 
         Console.Write($"You have entered {enteredPhoneNumberArray.Length} phone numbers, do you want to send them an sms?(y/n): ");
         char answerAboutSendingSMS = Convert.ToChar(Console.ReadLine());
-
-        //asking for the theme of a message
+         
+        //asking for the theme of a message 
         Console.Write($"You can choose the theme from this list(write the number of theme):");
         Console.Write(messageGenerator.writeThemesList());
         int enteredTheme = Convert.ToInt32(Console.ReadLine());

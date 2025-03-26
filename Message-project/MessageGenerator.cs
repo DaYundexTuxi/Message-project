@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Message_project
 {
-    internal class MessageGenerator // class only for generating messages as text to send them
+    // class only for generating messages as text to send them
+    internal class MessageGenerator 
     {
         // construction parts for the messages 
-        // 
+        // set of themes
         Dictionary<int, string> themesDictionary = new()
         {
             { 1, "Birthday" },
@@ -22,6 +23,7 @@ namespace Message_project
         string[] formalGreetingsArray = { "Hello", "Good day", "" }; // 
         string[] informalGreetingsArray = { "Heya", "What\'s up?", "Hi" };
 
+        // jus t
         string themesString;
         string messageText;
         Random random = new();
@@ -38,7 +40,6 @@ namespace Message_project
                 {
                     Console.WriteLine(e.ToString());
                 }
-                
             }
             return themesString.Trim();
         }
@@ -46,8 +47,8 @@ namespace Message_project
 
         //public int countThemes() { return themesDictionary.Count; }
 
-
-        public string generateMessageText(int themeId) //!!!!!!!!!!!!!!!!
+        //  generating a messege depending on needed theme (using random )
+        public string generateMessageText(int themeId) 
         {
             string theme = themesDictionary[themeId];
             switch (theme)

@@ -9,11 +9,11 @@ namespace Message_project
 {
     class PhoneNumber
     {
-        public PhoneNumber(string phoneNumToProceedWith) // constructor for phone numbers to work further with them as objects of this class, not just an array of strings
+        // constructor for phone numbers to work further with them as objects of this class, not just an array of strings
+        public PhoneNumber(string phoneNumToProceedWith)
         {
             string phoneNumber = phoneNumToProceedWith;
 
-            // function for sending message (atm as a string) returning text (with content of the message) about being succesfully sended
         }
 
         public static string sendTheMessage(int theme)
@@ -28,7 +28,7 @@ namespace Message_project
         {
             bool funcValue = (pNumberToCheck.Length == 8 && pNumberToCheck[0] == '2') ? true : false;
             return funcValue;
+            //in the future 
         }
-
     }
 }
