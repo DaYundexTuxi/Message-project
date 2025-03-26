@@ -14,23 +14,19 @@ namespace Message_project
             string phoneNumber = phoneNumToProceedWith;
 
             // function for sending message (atm as a string) returning text (with content of the message) about being succesfully sended
-            string sendTheMessage(string theme) 
-            {
-                MessageGenerator msg = new MessageGenerator(); 
-                string messageText = msg.generateMessageText(theme); // !!!!!!!!!!!!!!!!!! 
+        }
 
-                return $"On the {phoneNumber} was sent a message. Text follows: \"{messageText}\".";
-            }
+        public static string sendTheMessage(int theme)
+        {
+            MessageGenerator msg = new MessageGenerator();
+            string messageText = msg.generateMessageText(theme);
 
-            void puk()
-            {
-
-            }
+            return $"On the  was sent a message. Text follows: \"{messageText}\".";
         }
 
         public static bool isValid(string pNumberToCheck) // func to check if the phone number is valid (example: 20100230)
         {
-            bool funcValue = (pNumberToCheck.Length == 8 && pNumberToCheck[0] == 2) ? true : false;
+            bool funcValue = (pNumberToCheck.Length == 8 && pNumberToCheck[0] == '2') ? true : false;
             return funcValue;
         }
 

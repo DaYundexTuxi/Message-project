@@ -9,6 +9,8 @@ class Program
         string[] enteredPhoneNumberArray = { };
         bool processOfEnteringNumbers = true; // bool for while loop: to input numbers in to the enteredPhoneNumberArray
 
+        // creating MessageGenerator class object(dictionary) and filling it with information about themes
+        MessageGenerator messageGenerator = new MessageGenerator();
 
         // start of the program
         Console.WriteLine("Enter the desired phone numbers: ");
@@ -25,22 +27,12 @@ class Program
             }
             else if (PhoneNumber.isValid(inputedText))
             {
-                enteredPhoneNumberArray = new string[] { inputedText };
+                enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedText }).ToArray();
             }
             else
             {
                 Console.WriteLine("Invalid number entered, try again.");
             }
-
-            //switch (input)
-            //{
-            //    case "exit":
-            //        enteringNumbers = false;
-            //        break;
-            //    case :
-            //        Console.WriteLine("a");
-            //    default: 
-            //}
         }
 
         // showing the list of entered phone numbers
@@ -49,16 +41,22 @@ class Program
             Console.WriteLine($"{pNumber} is in the list.");
         }
 
-        //asking for sending email + should be 
+        //asking for sending email 
         Console.Write($"You have entered {enteredPhoneNumberArray.Length} phone numbers, do you want to send them an sms?(y/n): ");
-        char answerAfterPNumbers = Convert.ToChar(Console.ReadLine());
+        char answerAboutSendingSMS = Convert.ToChar(Console.ReadLine());
 
-        if (answerAfterPNumbers == 'y')
+        //asking for the theme of a message
+        Console.Write($"You can choose the theme from this list(write the number of theme):");
+        Console.Write(messageGenerator.writeThemesList());
+        int enteredTheme = Convert.ToInt32(Console.ReadLine());
+
+        //if asnwer yes - sends the message (rn only generates the message and gives it back as text)
+        if (answerAboutSendingSMS == 'y')
         {
             foreach (string pn in enteredPhoneNumberArray)
             {
                 PhoneNumber usedPhoneNumber = new PhoneNumber(pn);
-                usedPhoneNumber.;
+                Console.WriteLine(PhoneNumber.sendTheMessage(enteredTheme));
             }
         }
         else
