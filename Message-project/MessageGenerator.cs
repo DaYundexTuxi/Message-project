@@ -3,52 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 
 namespace Message_project
 {
     // class only for generating messages as text to send them
-    internal class MessageGenerator 
+    internal class MessageGenerator : IMessage
     {
+        public void sendMessage(string phoneNumber, ILogger logger)
+        {
+
+        }
+
         // construction parts for the messages 
         // set of themes
-        Dictionary<int, string> themesDictionary = new()
+        static Dictionary<int, string> themesDictionary = new()
         {
             { 1, "Birthday" },
             { 2, "InternationalWomensDay" },
             { 3, "NewYear" }
         };
-        
+
         // arrays of simple greetings 
         string[] formalGreetingsArray = { "Hello", "Good day", "" }; // 
         string[] informalGreetingsArray = { "Heya", "What\'s up?", "Hi" };
 
         // jus t
-        string themesString;
-        string messageText;
+        static string themesString;
+        public string messageText;
         Random random = new();
 
-        public string writeThemesList()
+        public static void writeThemesList()
         {
             for (int i = 0; i < themesDictionary.Count; i++)
             {
                 try
                 {
-                    themesString += $"{i + 1}. {themesDictionary[i+1]} ";
-                } 
-                catch (Exception e) 
+                    themesString += $"{i + 1}. {themesDictionary[i + 1]} ";
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
             }
-            return themesString.Trim();
+            Console.WriteLine(themesString.Trim());
         }
 
 
         //public int countThemes() { return themesDictionary.Count; }
 
-        //  generating a messege depending on needed theme (using random )
-        public string generateMessageText(int themeId) 
+        //  generating a message depending on needed theme (using random )
+        public string generateMessageText(int themeId) // here to overriede
         {
             string theme = themesDictionary[themeId];
             switch (theme)
@@ -61,7 +67,7 @@ namespace Message_project
                     break;
                 case "NewYear":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, I wish you happy new year!\n Best regards, your dear friend!!";
-                    break; 
+                    break;
             }
             return messageText;
         }
