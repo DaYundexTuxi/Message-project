@@ -10,6 +10,6 @@ namespace Message_project
 {
     internal interface ILogger
     {
-        void Log(string message) { }
+        void Log(string message);
     }
 }

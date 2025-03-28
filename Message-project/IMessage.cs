@@ -10,8 +10,8 @@ namespace Message_project
     internal interface IMessage
     {
         // interface - base for making messages (for console - plain text, for )
-        string getThemesList(ILogger logger) { string a = ""; return a; } 
+        //string getThemesList(ILogger logger);
 
-        string generateMessageText(int themeId, ILogger logger) { string a = ""; return a; } 
+        string getGeneratedMessageText(int themeId, ILogger logger);
     }
 }

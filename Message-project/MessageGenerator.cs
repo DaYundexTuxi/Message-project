@@ -12,7 +12,7 @@ namespace Message_project
     internal class MessageGenerator : IMessage
     {
         // getting logger 
-        private readonly ILogger fileLogger = new FileLogger();
+        //private readonly ILogger fileLogger = new FileLogger();
 
         // construction parts for the messages 
         // set of themes
@@ -32,7 +32,7 @@ namespace Message_project
         public string messageText;
         Random random = new();
 
-        public static string getThemesList()
+        public static  string getThemesList(ILogger fileLogger)
         {
             for (int i = 0; i < themesDictionary.Count; i++)
             {
@@ -43,14 +43,16 @@ namespace Message_project
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
+                    fileLogger.Log($"{e.ToString()}");
                 }
             }
+            // log the desired message about the operation
             return themesString.Trim(); 
         }
         //public int getThemesCount() { return themesDictionary.Count; }
 
         //  generating a message depending on needed theme (using random )
-        public string getGeneratedMessageText(int themeId) 
+        public string getGeneratedMessageText(int themeId, ILogger logger) 
         {
             string theme = themesDictionary[themeId];
             switch (theme)
