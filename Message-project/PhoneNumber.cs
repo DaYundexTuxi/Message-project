@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Message_project
 {
-    class PhoneNumber
+    class PhoneNumbers
     {
         // creating an instance of MessageGenerator
         static readonly IMessage messageGenerator = new MessageGenerator();
@@ -16,17 +16,17 @@ namespace Message_project
         static ILogger fileLogger = new FileLogger();
 
         // constructor for phone numbers to work further with them as objects of this class, not just an array of strings
-        public PhoneNumber(string phoneNumToProceedWith)
+        public PhoneNumbers(string phoneNumToProceedWith)
         {
             string phoneNumber = phoneNumToProceedWith;
         }
 
         // get's the messagetext to send by entering the theme ID
 
-        // !!!!!!!!!!!!!!!!!!!! if i make IMessage.generateMessageText() return void - need to make the MessageGenerator.generateMessageText() anyhow void too (maybe make the one in Interface - virtual? and rewrite return from void to string)
-        public static string sendTheMessage(int themeId)
+        // !!!!!!!!!!!!!!!!!!!! if i make IMessage.generateMessageText() return void - need to make the MessageGenerator.generateMessageText() somehow void too (maybe make the one in Interface - virtual? and rewrite return from void to string)
+        public static string getTheMessage(int themeId)
         {
-            string messageText = messageGenerator.generateMessageText(themeId, fileLogger);
+            string messageText = messageGenerator.generateMessageText(themeId, fileLogger); // HERE IT'S USED
             return $"On the  was sent a message. Text follows: \"{messageText}\".";
         }
 

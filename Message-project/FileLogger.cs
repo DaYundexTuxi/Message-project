@@ -9,7 +9,7 @@ namespace Message_project
     internal class FileLogger : ILogger
     {
         // _logger.Log(message)
-        public static void Log(string message)
+        public void Log(string message)
         {
             var fileLogger = NLog.LogManager.GetCurrentClassLogger();
             //_logger.Log(message);

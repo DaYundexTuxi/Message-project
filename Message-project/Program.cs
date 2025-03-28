@@ -1,12 +1,48 @@
 ﻿using System.Transactions; // not sure how to use this 
 using Message_project;
+//using
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+using ConsoleDI.Example;
 
 // LOGS!!!!!!!! + dependency inj nlog lib
 class Program
 {
 
-    static void Main(string[] args)
+    static async void Main(string[] args)
     {
+
+        HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+
+        builder.Services.AddSingleton<IExampleSingletonService, ExampleSingletonService>();
+        builder.Services.AddTransient<ServiceLifetimeReporter>();
+
+        using IHost host = builder.Build();
+        ExemplifyServiceLifetime(host.Services, "Lifetime 1");
+        ExemplifyServiceLifetime(host.Services, "Lifetime 2");
+
+        await host.RunAsync();
+
+        static void ExemplifyServiceLifetime(IServiceProvider hostProvider, string lifetime)
+        {
+            using IServiceScope serviceScope = hostProvider.CreateScope();
+            IServiceProvider provider = serviceScope.ServiceProvider;
+            ServiceLifetimeReporter logger = provider.GetRequiredService<ServiceLifetimeReporter>();
+            logger.ReportServiceLifetimeDetails(
+                $"{lifetime}: Call 1 to provider.GetRequiredService<ServiceLifetimeReporter>()");
+
+            Console.WriteLine("...");
+
+            logger = provider.GetRequiredService<ServiceLifetimeReporter>();
+            logger.ReportServiceLifetimeDetails(
+                $"{lifetime}: Call 2 to provider.GetRequiredService<ServiceLifetimeReporter>()");
+
+            Console.WriteLine();
+        }
+
+        // ---------------------------------------------------------------------------------------------------------------------
+
         string[] enteredPhoneNumberArray = { };
         bool processOfEnteringNumbers = true; // bool for while loop: to input numbers in to the enteredPhoneNumberArray
 
@@ -29,7 +65,7 @@ class Program
             {
                 break;
             }
-            else if (PhoneNumber.isValid(inputedText))
+            else if (PhoneNumbers.isValid(inputedText))
             {
                 enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedText }).ToArray(); // creates a new array and adds to it 
                 fileLogger.Log("");
@@ -54,8 +90,7 @@ class Program
         Console.Write($"You can choose the theme from this list(write the number of theme):");
         // printing out the list of themes
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 56 line
-        MessageGenerator.writeThemesList(); // ask if is it better, writing information right in method or giving it back as string for main to output it (purpose - write list of themes)
+        Console.WriteLine(MessageGenerator.getThemesList()); 
         int enteredTheme = Convert.ToInt32(Console.ReadLine());
 
         //if asnwer yes - sends the message (rn only generates the message and gives it back as text)
@@ -63,8 +98,8 @@ class Program
         {
             foreach (string individualPhoneNumber in enteredPhoneNumberArray)
             {
-                PhoneNumber usedPhoneNumber = new PhoneNumber(individualPhoneNumber);
-                Console.WriteLine(PhoneNumber.sendTheMessage(enteredTheme)); 
+                PhoneNumbers usedPhoneNumber = new PhoneNumbers(individualPhoneNumber);
+                Console.WriteLine(PhoneNumbers.getTheMessage(enteredTheme)); 
             }
         }
         else

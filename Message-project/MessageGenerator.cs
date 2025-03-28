@@ -11,10 +11,8 @@ namespace Message_project
     // class only for generating messages as text to send them
     internal class MessageGenerator : IMessage
     {
-        public void sendMessage(string phoneNumber, ILogger logger)
-        {
-
-        }
+        // getting logger 
+        private readonly ILogger fileLogger = new FileLogger();
 
         // construction parts for the messages 
         // set of themes
@@ -34,7 +32,7 @@ namespace Message_project
         public string messageText;
         Random random = new();
 
-        public static void writeThemesList()
+        public static string getThemesList()
         {
             for (int i = 0; i < themesDictionary.Count; i++)
             {
@@ -47,14 +45,12 @@ namespace Message_project
                     Console.WriteLine(e.ToString());
                 }
             }
-            Console.WriteLine(themesString.Trim());
+            return themesString.Trim(); 
         }
-
-
-        //public int countThemes() { return themesDictionary.Count; }
+        //public int getThemesCount() { return themesDictionary.Count; }
 
         //  generating a message depending on needed theme (using random )
-        public string generateMessageText(int themeId) // here to overriede
+        public string getGeneratedMessageText(int themeId) 
         {
             string theme = themesDictionary[themeId];
             switch (theme)
