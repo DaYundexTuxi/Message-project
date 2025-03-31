@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Message_project.interfaces;
 using NLog;
 
 
-namespace Message_project
+namespace Message_project.Classes
 {
     // class only for generating messages as text to send them
     internal class MessageGenerator : IMessage
     {
         // getting logger 
-        //private readonly ILogger fileLogger = new FileLogger();
+        //private readonly ILogger fileLogger = new NLog.LogManager.();
 
         // construction parts for the messages 
         // set of themes
@@ -32,7 +33,7 @@ namespace Message_project
         public string messageText;
         Random random = new();
 
-        public static  string getThemesList(ILogger fileLogger)
+        public string getThemesList()
         {
             for (int i = 0; i < themesDictionary.Count; i++)
             {
@@ -43,7 +44,7 @@ namespace Message_project
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
-                    fileLogger.Log($"{e.ToString()}");
+                    //fileLogger.Log($"{e.ToString()}");
                 }
             }
             // log the desired message about the operation
@@ -52,7 +53,7 @@ namespace Message_project
         //public int getThemesCount() { return themesDictionary.Count; }
 
         //  generating a message depending on needed theme (using random )
-        public string getGeneratedMessageText(int themeId, ILogger logger) 
+        public string getGeneratedMessageText(int themeId, interfaces.ILogger fileLogger) 
         {
             string theme = themesDictionary[themeId];
             switch (theme)
@@ -67,6 +68,7 @@ namespace Message_project
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, I wish you happy new year!\n Best regards, your dear friend!!";
                     break;
             }
+            fileLogger.Log(messageText);
             return messageText;
         }
     }

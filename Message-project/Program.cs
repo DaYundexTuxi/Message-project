@@ -1,79 +1,30 @@
 ﻿using System.Transactions; // not sure how to use this 
-using Message_project;
 //using
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 using ConsoleDI.Example;
+using Message_project.interfaces;
+using Message_project.Classes;
 
+// ADD FOLDERS - interfaces \ classes \ etc.
 // LOGS!!!!!!!! + dependency inj nlog lib
+// 
+
 class Program
 {
 
-    static async void Main(string[] args)
+    static void Main(string[] args)
     {
+        ServiceCollection? serviceCollection = new ServiceCollection();
 
-        HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+        serviceCollection.AddScoped<IMessage, MessageGenerator>();
+        serviceCollection.AddScoped<ILogger, FileLogger>();
+        serviceCollection.AddScoped<ConsoleBusinessLogicTest>();
 
-        builder.Services.AddSingleton<IExampleSingletonService, ExampleSingletonService>();
-        builder.Services.AddTransient<ServiceLifetimeReporter>();
+        ServiceProvider? serviceProvider = serviceCollection.BuildServiceProvider();
 
-        using IHost host = builder.Build();
-        ExemplifyServiceLifetime(host.Services, "Lifetime 1");
-        ExemplifyServiceLifetime(host.Services, "Lifetime 2");
+        ConsoleBusinessLogicTest? handler = serviceProvider.GetService<ConsoleBusinessLogicTest>();
 
-        await host.RunAsync();
-
-        static void ExemplifyServiceLifetime(IServiceProvider hostProvider, string lifetime)
-        {
-            using IServiceScope serviceScope = hostProvider.CreateScope();
-            IServiceProvider provider = serviceScope.ServiceProvider;
-            ServiceLifetimeReporter logger = provider.GetRequiredService<ServiceLifetimeReporter>();
-            logger.ReportServiceLifetimeDetails(
-                $"{lifetime}: Call 1 to provider.GetRequiredService<ServiceLifetimeReporter>()");
-
-            Console.WriteLine("...");
-
-            logger = provider.GetRequiredService<ServiceLifetimeReporter>();
-            logger.ReportServiceLifetimeDetails(
-                $"{lifetime}: Call 2 to provider.GetRequiredService<ServiceLifetimeReporter>()");
-
-            Console.WriteLine();
-        }
-
-        // ---------------------------------------------------------------------------------------------------------------------
-        // logger thingys
-        ILogger fileLogger = new FileLogger();
-
-        // start of the program
-        PhoneNumbersManager.fillThePhoneNumbersArray(true);
-
-        // showing the list of entered phone numbers
-        Console.WriteLine(PhoneNumbersManager.getEnteredPhoneNumbers());
-
-        //asking for sending email 
-        Console.Write($"You have entered {PhoneNumbersManager.enteredPhoneNumberArray.Length} phone numbers, do you want to send them an sms?(y/n): ");
-        char answerAboutSendingSMS = Convert.ToChar(Console.ReadLine());
-         
-        //asking for the theme of a message 
-        Console.Write($"You can choose the theme from this list(write the number of theme):");
-        // printing out the list of themes
-
-        Console.WriteLine(MessageGenerator.getThemesList(fileLogger)); 
-        int enteredTheme = Convert.ToInt32(Console.ReadLine());
-
-        //if asnwer yes - sends the message (rn only generates the message and gives it back as text)
-        if (answerAboutSendingSMS == 'y')
-        {
-            foreach (string individualPhoneNumber in PhoneNumbersManager.enteredPhoneNumberArray)
-            {
-                PhoneNumbersManager usedPhoneNumber = new PhoneNumbersManager(individualPhoneNumber);
-                Console.WriteLine(PhoneNumbersManager.getTheMessage(enteredTheme)); 
-            }
-        }
-        else
-        {
-            Console.WriteLine("ok-");
-        }
+        handler.test();
     }
 }

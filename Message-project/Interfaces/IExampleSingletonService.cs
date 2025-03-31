@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ConsoleDI.Example;
+namespace Message_project.interfaces;
 
 public interface IExampleSingletonService : IReportServiceLifetime
 {

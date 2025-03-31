@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace ConsoleDI;
+namespace Message_project.interfaces;
 
 public interface IReportServiceLifetime
 {

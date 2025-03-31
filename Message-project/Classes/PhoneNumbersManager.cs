@@ -5,7 +5,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Message_project
+using Message_project.interfaces;
+
+namespace Message_project.Classes
 {
     internal class PhoneNumbersManager
     {
@@ -48,7 +50,7 @@ namespace Message_project
                 {
                     break;
                 }
-                else if (PhoneNumbersManager.isValid(inputedText))
+                else if (isValid(inputedText))
                 {
                     enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedText }).ToArray(); // creates a new array and adds to it 
                     fileLogger.Log("");
@@ -60,10 +62,8 @@ namespace Message_project
             }
         }
 
-
-
         // get's the messagetext to send by passing the theme ID
-        public static string getTheMessage(int themeId)
+        public static string getTheMessage(int themeId, ILogger fileLogger)
         {
             string messageText = messageGenerator.getGeneratedMessageText(themeId, fileLogger); // HERE IT'S USED
             return $"On the  was sent a message. Text follows: \"{messageText}\".";
@@ -72,7 +72,7 @@ namespace Message_project
         // func to check if the phone number is valid (example: 20100230)
         public static bool isValid(string pNumberToCheck) 
         {
-            bool funcValue = (pNumberToCheck.Length == 8 && pNumberToCheck[0] == '2') ? true : false;
+            bool funcValue = pNumberToCheck.Length == 8 && pNumberToCheck[0] == '2' ? true : false;
             return funcValue;
             //in the future 
         }
