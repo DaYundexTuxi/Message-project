@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 
-namespace Message_project.interfaces
+namespace Message_project.Interfaces
 {
     internal interface ILogger
     {

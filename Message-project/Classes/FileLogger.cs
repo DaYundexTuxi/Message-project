@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Message_project.interfaces;
+using Message_project.Interfaces;
 
 namespace Message_project.Classes
 {

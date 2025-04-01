@@ -5,19 +5,28 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-using Message_project.interfaces;
+using Message_project.Interfaces;
 
 namespace Message_project.Classes
 {
-    internal class PhoneNumbersManager
+    internal class PhoneNumbersManager : IPhoneNumbersManager
     {
+        //private readonly IPhoneNumbersManager _phoneNumbersManager;
+
         public static string[] enteredPhoneNumberArray = { };
-        
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //public string[] EnteredPhoneNumberArray { get { return enteredPhoneNumberArray;  } set { enteredPhoneNumberArray = value;  } }
+
         // creating an instance of MessageGenerator
         static readonly IMessage messageGenerator = new MessageGenerator();
 
         // creating logger
         static ILogger fileLogger = new FileLogger();
+
+        public PhoneNumbersManager()
+        {
+
+        }
 
         // constructor for phone numbers to work further with them as objects of this class, not just an array of strings
         public PhoneNumbersManager(string phoneNumToProceedWith)
@@ -26,10 +35,10 @@ namespace Message_project.Classes
         }
 
         // give out the string of all 
-        public static string getEnteredPhoneNumbers()
+        public string getEnteredPhoneNumbers()
         {
-                
-            string phoneNumberList = string.Empty;
+
+            string phoneNumberList = "";
             foreach (string phoneNumber in enteredPhoneNumberArray)
             {
                 phoneNumberList += $"{phoneNumber} \n";
@@ -38,22 +47,22 @@ namespace Message_project.Classes
         }
 
         // method for inputing phone numbers
-        public static void fillThePhoneNumbersArray(bool processOfEnteringNumbers)
+        public void fillThePhoneNumbersArray(bool processOfEnteringNumbers)
         {
             Console.WriteLine("Enter the desired phone numbers: ");
             Console.WriteLine("You can enter \'exit\' to exit the entering the numbers");
             while (processOfEnteringNumbers)
             {
-                string inputedText = Console.ReadLine();
+                string inputedPhoneNumber = Console.ReadLine();
 
-                if (inputedText == "exit")
+                if (inputedPhoneNumber == "exit")
                 {
                     break;
                 }
-                else if (isValid(inputedText))
+                else if (isValid(inputedPhoneNumber))
                 {
-                    enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedText }).ToArray(); // creates a new array and adds to it 
-                    fileLogger.Log("");
+                    enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedPhoneNumber }).ToArray(); // creates a new array and adds inputedPhoneNumber to it
+                    //fileLogger.Log("");
                 }
                 else
                 {
@@ -63,9 +72,9 @@ namespace Message_project.Classes
         }
 
         // get's the messagetext to send by passing the theme ID
-        public static string getTheMessage(int themeId, ILogger fileLogger)
+        public string getTheMessage(int themeId) // , ILogger fileLogger
         {
-            string messageText = messageGenerator.getGeneratedMessageText(themeId, fileLogger); // HERE IT'S USED
+            string messageText = messageGenerator.getGeneratedMessageText(themeId); // HERE IT'S USED
             return $"On the  was sent a message. Text follows: \"{messageText}\".";
         }
 

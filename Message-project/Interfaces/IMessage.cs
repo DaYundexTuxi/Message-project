@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Message_project.interfaces
+namespace Message_project.Interfaces
 {
     internal interface IMessage
     {
@@ -13,6 +13,6 @@ namespace Message_project.interfaces
 
         string getThemesList();
 
-        string getGeneratedMessageText(int themeId, ILogger logger);
+        string getGeneratedMessageText(int themeId); // , ILogger logger
     }
 }

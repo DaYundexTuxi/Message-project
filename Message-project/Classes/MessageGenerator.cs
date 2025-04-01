@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Message_project.interfaces;
+using Message_project.Interfaces;
 using NLog;
 
 
@@ -53,7 +53,7 @@ namespace Message_project.Classes
         //public int getThemesCount() { return themesDictionary.Count; }
 
         //  generating a message depending on needed theme (using random )
-        public string getGeneratedMessageText(int themeId, interfaces.ILogger fileLogger) 
+        public string getGeneratedMessageText(int themeId) 
         {
             string theme = themesDictionary[themeId];
             switch (theme)
@@ -68,7 +68,7 @@ namespace Message_project.Classes
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, I wish you happy new year!\n Best regards, your dear friend!!";
                     break;
             }
-            fileLogger.Log(messageText);
+            //fileLogger.Log(messageText);
             return messageText;
         }
     }

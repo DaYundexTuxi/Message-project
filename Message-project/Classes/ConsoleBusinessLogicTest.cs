@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Message_project.interfaces;
+using Message_project.Interfaces;
 
 namespace Message_project.Classes
 {
@@ -11,20 +11,22 @@ namespace Message_project.Classes
     {
         private readonly IMessage _mg;
         private readonly ILogger _logger;
+        private readonly IPhoneNumbersManager _phoneNumbersManager;
 
-
-        public ConsoleBusinessLogicTest(IMessage mg, ILogger logger)
+        public ConsoleBusinessLogicTest(IMessage mg, ILogger logger, IPhoneNumbersManager phoneNumbersManager)
         {
             _mg = mg;
             _logger = logger;
+            _phoneNumbersManager = phoneNumbersManager;
         }
 
         public void test()
         {
-            PhoneNumbersManager.fillThePhoneNumbersArray(true);
+
+            _phoneNumbersManager.fillThePhoneNumbersArray(true);
 
             // showing the list of entered phone numbers
-            Console.WriteLine(PhoneNumbersManager.getEnteredPhoneNumbers());
+            Console.WriteLine(_phoneNumbersManager.getEnteredPhoneNumbers());
 
             //asking for sending email 
             Console.Write($"You have entered {PhoneNumbersManager.enteredPhoneNumberArray.Length} phone numbers, do you want to send them an sms?(y/n): ");
@@ -43,7 +45,7 @@ namespace Message_project.Classes
                 foreach (string individualPhoneNumber in PhoneNumbersManager.enteredPhoneNumberArray)
                 {
                     PhoneNumbersManager usedPhoneNumber = new PhoneNumbersManager(individualPhoneNumber);
-                    Console.WriteLine(PhoneNumbersManager.getTheMessage(enteredTheme));
+                    Console.WriteLine(_phoneNumbersManager.getTheMessage(enteredTheme));
                 }
             }
             else
