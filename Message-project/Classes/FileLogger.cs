@@ -4,18 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Message_project.Interfaces;
+using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace Message_project.Classes
 {
-    internal class FileLogger : ILogger
+    internal class FileLogger : Interfaces.ILogger
     {
-        
-        public void Log(string message)
-        {
-            var fileLogger = NLog.LogManager.GetCurrentClassLogger();
 
-            fileLogger.Info("Just info: {message} from: {username}", message, "aboba");
-            NLog.LogManager.Shutdown();
+        public void logInfo(string infoMessage, Logger logger)
+        {
+            logger.Info("Info message: {message} from: {username}", infoMessage, "aboba");
         }
+
+        //public void logWarn(string warningMessage, Logger logger)
+        //{
+        //    logger.Warn("Warning message: {message}, from:{}", warningMessage);
+        //}
+
+        //public void logError(string errorMessage, Logger logger)
+        //{
+        //    logger.Warn("Error message: {message}, from:{}", errorMessage);
+        //}
     }
 }

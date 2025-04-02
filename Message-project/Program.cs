@@ -13,7 +13,7 @@ class Program
 {
     static void Main(string[] args)
     {
-
+        //ConsoleBusinessLogicTest.startActualProgram();
         ServiceCollection? serviceCollection = new ServiceCollection();
 
         serviceCollection.AddScoped<IMessage, MessageGenerator>();
@@ -25,6 +25,7 @@ class Program
 
         ConsoleBusinessLogicTest? handler = serviceProvider.GetService<ConsoleBusinessLogicTest>();
 
+        //handler.startActualProgram();
         handler.test();
     }
 }

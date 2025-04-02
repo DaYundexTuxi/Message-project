@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Message_project.Interfaces
 {
-    //made an interface for PhoneNUmbersManager 
+    //made an interface for PhoneNumbersManager 
     internal interface IPhoneNumbersManager
     {
         //string[] EnteredPhoneNumberArray { get; set; }

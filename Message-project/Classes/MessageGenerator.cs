@@ -61,7 +61,7 @@ namespace Message_project.Classes
                 case "Birthday":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, I wish you hapiness and growing income!\n Best regards, your dear friend!!";
                     break;
-                case "InternationalWomansDay":
+                case "InternationalWomensDay":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, have a lovely day and \n Best regards, your dear friend!!";
                     break;
                 case "NewYear":

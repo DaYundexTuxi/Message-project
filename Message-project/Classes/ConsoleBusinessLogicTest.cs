@@ -22,7 +22,10 @@ namespace Message_project.Classes
 
         public void test()
         {
+            var fileLogger = NLog.LogManager.GetCurrentClassLogger();
+            _logger.logInfo("Test started!", fileLogger);
 
+            // start of the program
             _phoneNumbersManager.fillThePhoneNumbersArray(true);
 
             // showing the list of entered phone numbers
@@ -50,8 +53,18 @@ namespace Message_project.Classes
             }
             else
             {
-                Console.WriteLine("ok-");
+                Console.WriteLine("Goodbye.");
             }
+
+            _logger.logInfo("Test executed!", fileLogger);
+            NLog.LogManager.Shutdown();
+        }
+
+        public void startActualProgram() // can't really make it static - handler won't work 
+        {
+            // initialize form
+            ApplicationConfiguration.Initialize();
+            Application.Run(new MainForm());
         }
     }
 }
