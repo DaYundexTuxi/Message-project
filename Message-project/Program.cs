@@ -13,19 +13,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        //ConsoleBusinessLogicTest.startActualProgram();
+
         ServiceCollection? serviceCollection = new ServiceCollection();
 
         serviceCollection.AddScoped<IMessage, MessageGenerator>();
         serviceCollection.AddScoped<ILogger, FileLogger>();
         serviceCollection.AddScoped<IPhoneNumbersManager, PhoneNumbersManager>();
-        serviceCollection.AddScoped<ConsoleBusinessLogicTest>();
+        serviceCollection.AddScoped<BusinessLogicTest>();
 
         ServiceProvider? serviceProvider = serviceCollection.BuildServiceProvider();
 
-        ConsoleBusinessLogicTest? handler = serviceProvider.GetService<ConsoleBusinessLogicTest>();
+        BusinessLogicTest? handler = serviceProvider.GetService<BusinessLogicTest>();
 
-        //handler.startActualProgram();
-        handler.test();
+        handler.startActualProgram();
+        //handler.test();
     }
 }

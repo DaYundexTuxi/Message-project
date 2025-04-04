@@ -7,13 +7,13 @@ using Message_project.Interfaces;
 
 namespace Message_project.Classes
 {
-    internal class ConsoleBusinessLogicTest
+    internal class BusinessLogicTest
     {
         private readonly IMessage _mg;
         private readonly ILogger _logger;
         private readonly IPhoneNumbersManager _phoneNumbersManager;
 
-        public ConsoleBusinessLogicTest(IMessage mg, ILogger logger, IPhoneNumbersManager phoneNumbersManager)
+        public BusinessLogicTest(IMessage mg, ILogger logger, IPhoneNumbersManager phoneNumbersManager)
         {
             _mg = mg;
             _logger = logger;
@@ -26,7 +26,7 @@ namespace Message_project.Classes
             _logger.logInfo("Test started!", fileLogger);
 
             // start of the program
-            _phoneNumbersManager.fillThePhoneNumbersArray(true);
+            _phoneNumbersManager.fillThePhoneNumbersArray("");
 
             // showing the list of entered phone numbers
             Console.WriteLine(_phoneNumbersManager.getEnteredPhoneNumbers());

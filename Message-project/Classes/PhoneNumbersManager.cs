@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
 using Message_project.Interfaces;
 using NLog;
 
@@ -12,11 +11,11 @@ namespace Message_project.Classes
 {
     internal class PhoneNumbersManager : IPhoneNumbersManager
     {
-        //private readonly IPhoneNumbersManager _phoneNumbersManager;
-
+        // making an array for storing entered phone numbers (from fillThePhoneNumbersArray())
         public static string[] enteredPhoneNumberArray = { };
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //public string[] EnteredPhoneNumberArray { get { return enteredPhoneNumberArray;  } set { enteredPhoneNumberArray = value;  } }
+
+        // bool field for while cycle from fillThePhoneNumbersArray()
+        bool processOfEnteringNumbers;
 
         // creating an instance of MessageGenerator
         static readonly IMessage messageGenerator = new MessageGenerator();
@@ -25,17 +24,16 @@ namespace Message_project.Classes
         private Logger fileLogger = NLog.LogManager.GetCurrentClassLogger();
         private FileLogger loggerr = new FileLogger();
 
-        
+        // empty constructor for handler
         public PhoneNumbersManager() {}
         
-
         // constructor for phone numbers to work further with them as objects of this class, not just an array of strings
         public PhoneNumbersManager(string phoneNumToProceedWith)
         {
             string phoneNumber = phoneNumToProceedWith;
         }
 
-        // give out the string of all 
+        // give out the string of all entered phone numbers
         public string getEnteredPhoneNumbers()
         {
             string phoneNumberList = "";
@@ -47,8 +45,9 @@ namespace Message_project.Classes
         }
 
         // method for inputing phone numbers
-        public void fillThePhoneNumbersArray(bool processOfEnteringNumbers)
+        public void fillThePhoneNumbersArray(string a)
         {
+            processOfEnteringNumbers = true;
             Console.WriteLine("Enter the desired phone numbers: ");
             Console.WriteLine("You can enter \'exit\' to exit the entering the numbers");
             while (processOfEnteringNumbers)
@@ -80,7 +79,7 @@ namespace Message_project.Classes
         }
 
         // func to check if the phone number is valid (example: 20100230)
-        public static bool isValid(string pNumberToCheck) 
+        public bool isValid(string pNumberToCheck) 
         {
             if (pNumberToCheck == null)
             {

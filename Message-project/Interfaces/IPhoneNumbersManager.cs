@@ -13,8 +13,10 @@ namespace Message_project.Interfaces
 
         string getEnteredPhoneNumbers();
 
-        void fillThePhoneNumbersArray(bool processOfEnteringNumbers);
+        void fillThePhoneNumbersArray(string phoneNumbers);
 
         string getTheMessage(int themeId);
+
+        bool isValid(string pNumberToCheck);
     }
 }

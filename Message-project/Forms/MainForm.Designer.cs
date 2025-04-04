@@ -28,55 +28,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            SendMessages = new Button();
             label1 = new Label();
-            textBox1 = new TextBox();
+            txtbPhoneNumbersInput = new TextBox();
+            lblTextOutput1 = new Label();
+            lblTextOutput2 = new Label();
+            panel1 = new Panel();
+            lblResultMessages = new Label();
+            clbListOfThemes = new CheckedListBox();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
+            // SendMessages
             // 
-            button1.Location = new Point(292, 70);
-            button1.Name = "button1";
-            button1.Size = new Size(109, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Send messages";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            SendMessages.Location = new Point(144, 52);
+            SendMessages.Name = "SendMessages";
+            SendMessages.Size = new Size(160, 60);
+            SendMessages.TabIndex = 0;
+            SendMessages.Text = "Send messages";
+            SendMessages.UseVisualStyleBackColor = true;
+            SendMessages.Click += SendMessages_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(29, 44);
+            label1.Location = new Point(29, 26);
             label1.Name = "label1";
             label1.Size = new Size(94, 15);
             label1.TabIndex = 1;
             label1.Text = "Phone numbers:";
             // 
-            // textBox1
+            // txtbPhoneNumbersInput
             // 
-            textBox1.Location = new Point(143, 41);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(258, 23);
-            textBox1.TabIndex = 2;
+            txtbPhoneNumbersInput.Location = new Point(144, 23);
+            txtbPhoneNumbersInput.Name = "txtbPhoneNumbersInput";
+            txtbPhoneNumbersInput.Size = new Size(510, 23);
+            txtbPhoneNumbersInput.TabIndex = 2;
+            // 
+            // lblTextOutput1
+            // 
+            lblTextOutput1.AutoSize = true;
+            lblTextOutput1.Location = new Point(15, 10);
+            lblTextOutput1.Name = "lblTextOutput1";
+            lblTextOutput1.Size = new Size(10, 15);
+            lblTextOutput1.TabIndex = 3;
+            lblTextOutput1.Text = " ";
+            // 
+            // lblTextOutput2
+            // 
+            lblTextOutput2.AutoSize = true;
+            lblTextOutput2.Location = new Point(15, 99);
+            lblTextOutput2.Name = "lblTextOutput2";
+            lblTextOutput2.Size = new Size(10, 15);
+            lblTextOutput2.TabIndex = 4;
+            lblTextOutput2.Text = " ";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(lblTextOutput2);
+            panel1.Controls.Add(lblTextOutput1);
+            panel1.Location = new Point(144, 118);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(510, 187);
+            panel1.TabIndex = 5;
+            // 
+            // lblResultMessages
+            // 
+            lblResultMessages.AutoSize = true;
+            lblResultMessages.Location = new Point(76, 118);
+            lblResultMessages.Name = "lblResultMessages";
+            lblResultMessages.Size = new Size(47, 15);
+            lblResultMessages.TabIndex = 6;
+            lblResultMessages.Text = "Results:";
+            // 
+            // clbListOfThemes
+            // 
+            clbListOfThemes.CheckOnClick = true;
+            clbListOfThemes.FormattingEnabled = true;
+            clbListOfThemes.Items.AddRange(new object[] { "Birthday", "International Women's day", "New Year" });
+            clbListOfThemes.Location = new Point(310, 54);
+            clbListOfThemes.Name = "clbListOfThemes";
+            clbListOfThemes.Size = new Size(344, 58);
+            clbListOfThemes.TabIndex = 7;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(413, 316);
-            Controls.Add(textBox1);
+            ClientSize = new Size(676, 332);
+            Controls.Add(clbListOfThemes);
+            Controls.Add(lblResultMessages);
+            Controls.Add(SendMessages);
+            Controls.Add(panel1);
+            Controls.Add(txtbPhoneNumbersInput);
             Controls.Add(label1);
-            Controls.Add(button1);
             Name = "MainForm";
             Text = "Message sender program";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
+        private Button SendMessages;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox txtbPhoneNumbersInput;
+        private Label lblTextOutput1;
+        private Label lblTextOutput2;
+        private Panel panel1;
+        private Label lblResultMessages;
+        private CheckedListBox clbListOfThemes;
     }
 }
