@@ -44,6 +44,11 @@ namespace Message_project.Classes
             return phoneNumberList.Trim();
         }
 
+        public int getPhoneNumbersAmount()
+        {
+            return enteredPhoneNumberArray.Length;
+        }
+
         // method for inputing phone numbers
         public void fillThePhoneNumbersArray(string a)
         {

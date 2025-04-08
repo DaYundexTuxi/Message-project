@@ -14,16 +14,17 @@ namespace Message_project.Classes
 {
     public partial class MainForm : Form
     {
-        private readonly IPhoneNumbersManager _phoneNumbersManager = new PhoneNumbersManager();
-        private readonly IMessage _message = new MessageGenerator();
+        // making instance to use, furter will make it work with DI
+        private readonly IPhoneNumbersManager _phoneNumbersManager = new FormsPhoneNumbersManager();
+
+        // some fields for button functions
+        private string inputedPhones = "";
+        private string usedTheme = "";
 
         public MainForm()
         {
             InitializeComponent();
         }
-
-        private string inputedPhones = "";
-
 
         private void SendMessages_Click(object sender, EventArgs e)
         {
@@ -33,14 +34,33 @@ namespace Message_project.Classes
 
             // clear the label
             lblTextOutput1.Text = " ";
-
+            
+           // write down used theme\s in lblTextOutput1
             foreach (var item in clbListOfThemes.CheckedItems)
             {
                 lblTextOutput1.Text += " " + item.ToString();
             }
 
-            //lblTextOutput1.Text = inputedPhones;
-            
+            // returning the message using picked theme
+            if (lblTextOutput1.Text != "")
+            {
+                usedTheme = lblTextOutput1.Text; // giving 
+                lblTextOutput2.Text = inputedPhones;
+
+                // loop to fill textOutput with generated messages 
+                for (int i = 0; i <= _phoneNumbersManager.getPhoneNumbersAmount() ; i++)
+                {
+
+                    string message = _phoneNumbersManager.getTheMessage();
+                    lbxResultOutput.Items.Add();
+                }
+
+            }
+            else
+            {
+                lblTextOutput2.Text = "No picked themes to use";
+            }
+
         }
 
     }

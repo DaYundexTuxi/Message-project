@@ -36,6 +36,7 @@
             panel1 = new Panel();
             lblResultMessages = new Label();
             clbListOfThemes = new CheckedListBox();
+            lbxResultOutput = new ListBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             // lblTextOutput1
             // 
             lblTextOutput1.AutoSize = true;
-            lblTextOutput1.Location = new Point(15, 10);
+            lblTextOutput1.Location = new Point(3, 142);
             lblTextOutput1.Name = "lblTextOutput1";
             lblTextOutput1.Size = new Size(10, 15);
             lblTextOutput1.TabIndex = 3;
@@ -77,7 +78,7 @@
             // lblTextOutput2
             // 
             lblTextOutput2.AutoSize = true;
-            lblTextOutput2.Location = new Point(15, 99);
+            lblTextOutput2.Location = new Point(3, 167);
             lblTextOutput2.Name = "lblTextOutput2";
             lblTextOutput2.Size = new Size(10, 15);
             lblTextOutput2.TabIndex = 4;
@@ -85,6 +86,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(lbxResultOutput);
             panel1.Controls.Add(lblTextOutput2);
             panel1.Controls.Add(lblTextOutput1);
             panel1.Location = new Point(144, 118);
@@ -110,6 +112,14 @@
             clbListOfThemes.Name = "clbListOfThemes";
             clbListOfThemes.Size = new Size(344, 58);
             clbListOfThemes.TabIndex = 7;
+            // 
+            // lbxResultOutput
+            // 
+            lbxResultOutput.FormattingEnabled = true;
+            lbxResultOutput.Location = new Point(0, 0);
+            lbxResultOutput.Name = "lbxResultOutput";
+            lbxResultOutput.Size = new Size(510, 139);
+            lbxResultOutput.TabIndex = 8;
             // 
             // MainForm
             // 
@@ -140,5 +150,6 @@
         private Panel panel1;
         private Label lblResultMessages;
         private CheckedListBox clbListOfThemes;
+        private ListBox lbxResultOutput;
     }
 }
