@@ -13,12 +13,16 @@ namespace Message_project.Interfaces
 
         string getEnteredPhoneNumbers();
 
-        public int getPhoneNumbersAmount(;
+        public int getPhoneNumbersAmount();
 
         void fillThePhoneNumbersArray(string phoneNumbers);
 
         string getTheMessage(int themeId);
 
         bool isValid(string pNumberToCheck);
+
+        public int getThemeID(string theme);
+
+        public string getPhoneNumberByArrayID(int id);
     }
 }

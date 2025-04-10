@@ -97,5 +97,15 @@ namespace Message_project.Classes
             }
             //in the future 
         }
+
+        public int getThemeID(string theme)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getPhoneNumberByArrayID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

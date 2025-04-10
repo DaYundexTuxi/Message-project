@@ -31,12 +31,12 @@
             SendMessages = new Button();
             label1 = new Label();
             txtbPhoneNumbersInput = new TextBox();
-            lblTextOutput1 = new Label();
-            lblTextOutput2 = new Label();
+            lblInputedTheme = new Label();
+            lblInputedPhoneNumbers = new Label();
             panel1 = new Panel();
+            lbxResultOutput = new ListBox();
             lblResultMessages = new Label();
             clbListOfThemes = new CheckedListBox();
-            lbxResultOutput = new ListBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,33 +66,41 @@
             txtbPhoneNumbersInput.Size = new Size(510, 23);
             txtbPhoneNumbersInput.TabIndex = 2;
             // 
-            // lblTextOutput1
+            // lblInputedTheme
             // 
-            lblTextOutput1.AutoSize = true;
-            lblTextOutput1.Location = new Point(3, 142);
-            lblTextOutput1.Name = "lblTextOutput1";
-            lblTextOutput1.Size = new Size(10, 15);
-            lblTextOutput1.TabIndex = 3;
-            lblTextOutput1.Text = " ";
+            lblInputedTheme.AutoSize = true;
+            lblInputedTheme.Location = new Point(3, 142);
+            lblInputedTheme.Name = "lblInputedTheme";
+            lblInputedTheme.Size = new Size(10, 15);
+            lblInputedTheme.TabIndex = 3;
+            lblInputedTheme.Text = " ";
             // 
-            // lblTextOutput2
+            // lblInputedPhoneNumbers
             // 
-            lblTextOutput2.AutoSize = true;
-            lblTextOutput2.Location = new Point(3, 167);
-            lblTextOutput2.Name = "lblTextOutput2";
-            lblTextOutput2.Size = new Size(10, 15);
-            lblTextOutput2.TabIndex = 4;
-            lblTextOutput2.Text = " ";
+            lblInputedPhoneNumbers.AutoSize = true;
+            lblInputedPhoneNumbers.Location = new Point(3, 167);
+            lblInputedPhoneNumbers.Name = "lblInputedPhoneNumbers";
+            lblInputedPhoneNumbers.Size = new Size(10, 15);
+            lblInputedPhoneNumbers.TabIndex = 4;
+            lblInputedPhoneNumbers.Text = " ";
             // 
             // panel1
             // 
             panel1.Controls.Add(lbxResultOutput);
-            panel1.Controls.Add(lblTextOutput2);
-            panel1.Controls.Add(lblTextOutput1);
+            panel1.Controls.Add(lblInputedPhoneNumbers);
+            panel1.Controls.Add(lblInputedTheme);
             panel1.Location = new Point(144, 118);
             panel1.Name = "panel1";
             panel1.Size = new Size(510, 187);
             panel1.TabIndex = 5;
+            // 
+            // lbxResultOutput
+            // 
+            lbxResultOutput.FormattingEnabled = true;
+            lbxResultOutput.Location = new Point(0, 0);
+            lbxResultOutput.Name = "lbxResultOutput";
+            lbxResultOutput.Size = new Size(510, 139);
+            lbxResultOutput.TabIndex = 8;
             // 
             // lblResultMessages
             // 
@@ -112,14 +120,6 @@
             clbListOfThemes.Name = "clbListOfThemes";
             clbListOfThemes.Size = new Size(344, 58);
             clbListOfThemes.TabIndex = 7;
-            // 
-            // lbxResultOutput
-            // 
-            lbxResultOutput.FormattingEnabled = true;
-            lbxResultOutput.Location = new Point(0, 0);
-            lbxResultOutput.Name = "lbxResultOutput";
-            lbxResultOutput.Size = new Size(510, 139);
-            lbxResultOutput.TabIndex = 8;
             // 
             // MainForm
             // 
@@ -145,8 +145,8 @@
         private Button SendMessages;
         private Label label1;
         private TextBox txtbPhoneNumbersInput;
-        private Label lblTextOutput1;
-        private Label lblTextOutput2;
+        private Label lblInputedTheme;
+        private Label lblInputedPhoneNumbers;
         private Panel panel1;
         private Label lblResultMessages;
         private CheckedListBox clbListOfThemes;

@@ -13,6 +13,8 @@ namespace Message_project.Interfaces
 
         string getThemesList();
 
+        int getThemesCount();
+
         string getGeneratedMessageText(int themeId); // , ILogger logger
     }
 }

@@ -7,8 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.System.UserProfile;
+
+using System.IO.Ports;
 using Message_project.Interfaces;
+
 //using NLog;
+
+// model view controller
 
 namespace Message_project.Classes
 {
@@ -18,8 +24,11 @@ namespace Message_project.Classes
         private readonly IPhoneNumbersManager _phoneNumbersManager = new FormsPhoneNumbersManager();
 
         // some fields for button functions
-        private string inputedPhones = "";
+        private string inputedPhoneNumbers = "";
         private string usedTheme = "";
+
+        // will be used for random delay to send the message
+        Random rnd = new Random();
 
         public MainForm()
         {
@@ -29,36 +38,49 @@ namespace Message_project.Classes
         private void SendMessages_Click(object sender, EventArgs e)
         {
             // take numbers, divide them from one string to substrings, send each a message and show number and the message + have a choice between 3 
-            inputedPhones = txtbPhoneNumbersInput.Text;
-            // message.sendMessage(phonenumber, theme); (with for loop)
+            inputedPhoneNumbers = txtbPhoneNumbersInput.Text;
+            _phoneNumbersManager.fillThePhoneNumbersArray(inputedPhoneNumbers);
 
-            // clear the label
-            lblTextOutput1.Text = " ";
-            
-           // write down used theme\s in lblTextOutput1
+            // clear themes and phoneNumbers labels
+            lblInputedTheme.Text = "";
+            lblInputedPhoneNumbers.Text = "";
+
+            // clear textbox for numbers and for themes
+            //txtbPhoneNumbersInput.Text = "";
+
+
+            //// write down used theme\s in lblTextOutput1 (really need to remake it so only 1 theme can be chosen at one time)
             foreach (var item in clbListOfThemes.CheckedItems)
             {
-                lblTextOutput1.Text += " " + item.ToString();
+                if (item.ToString() != "")
+                {
+                    lblInputedTheme.Text += item.ToString() + " ";
+                }
             }
 
+            // !!!! ТУТ РАСКОММЕНТИТЬ ЧТОБЫ ПОСМОТРЕТЬ 
+            //lbxResultOutput.Items.Add(MessageGenerator.themesDictionary[2] == lblInputedTheme.Text.Replace(" ", "").Replace("'", ""));
+            //lbxResultOutput.Items.Add(MessageGenerator.themesDictionary[2]);
+            //lbxResultOutput.Items.Add(lblInputedTheme.Text.Replace(" ", "").Replace("'", ""));
+
+            // !!!! ТУТ ЗАКОМЕНТИТЬ ЧТОБЫ ПОСМОТРЕТЬ
             // returning the message using picked theme
-            if (lblTextOutput1.Text != "")
+            if (lblInputedTheme.Text != "")
             {
-                usedTheme = lblTextOutput1.Text; // giving 
-                lblTextOutput2.Text = inputedPhones;
+                usedTheme = lblInputedTheme.Text; // assign first output to theme, for it to be readable (later on will remake clean)
+                lblInputedPhoneNumbers.Text = inputedPhoneNumbers;
 
                 // loop to fill textOutput with generated messages 
-                for (int i = 0; i <= _phoneNumbersManager.getPhoneNumbersAmount() ; i++)
+                for (int i = 0; i < _phoneNumbersManager.getPhoneNumbersAmount(); i++)
                 {
-
-                    string message = _phoneNumbersManager.getTheMessage();
-                    lbxResultOutput.Items.Add();
+                    string message = _phoneNumbersManager.getPhoneNumberByArrayID(i) + " " + _phoneNumbersManager.getTheMessage(_phoneNumbersManager.getThemeID(usedTheme));
+                    lbxResultOutput.Items.Add(message);
                 }
-
             }
             else
             {
-                lblTextOutput2.Text = "No picked themes to use";
+                lblInputedPhoneNumbers.Text = "";
+                lblInputedTheme.Text = "Error: No picked themes to use!";
             }
 
         }

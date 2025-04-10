@@ -22,7 +22,7 @@ namespace Message_project.Classes
 
         public void fillThePhoneNumbersArray(string phoneNumbers)
         {
-            enteredPhoneNumberArray = phoneNumbers.Split(',');
+            enteredPhoneNumberArray = [.. phoneNumbers.Split(',').Select(phoneNum => phoneNum.Trim())];
         }
 
         public string getEnteredPhoneNumbers()
@@ -40,13 +40,20 @@ namespace Message_project.Classes
             return enteredPhoneNumberArray.Length;
         }
 
+        public string getPhoneNumberByArrayID(int id)
+        {
+            return enteredPhoneNumberArray[id];
+        }
+
+        // generating the message by used theme and returning it as string + logging the message in file
         public string getTheMessage(int themeId)
         {
             string messageText = messageGenerator.getGeneratedMessageText(themeId);
             loggerr.logInfo(messageText, fileLogger);
-            return $"\"{messageText}\".";
+            return $"{messageText}.";
         }
 
+        // method to simply validate if phone number is real (exmpl. : 23544563)
         public bool isValid(string pNumberToCheck)
         {
             if (pNumberToCheck == null)
@@ -57,9 +64,25 @@ namespace Message_project.Classes
             {
                 bool funcValue = pNumberToCheck.Length == 8 && pNumberToCheck[0] == '2';
                 return funcValue;
-            }
+            }            
+        }
 
-            
+        // method to get theme's ID comparing it to the themesDictionary dictionaries values
+        public int getThemeID(string theme)
+        {
+            // getting rid of spaces and apostrophes
+            theme.Replace(" ", "").Replace("'", "");
+
+            // default value for theme is 0 -> will cause an error
+            int id = 0; 
+            for (int i = 1; i <= messageGenerator.getThemesCount(); i++)
+            {
+                if (MessageGenerator.themesDictionary[i] == theme)
+                {
+                    id = i;
+                }
+            }
+            return id;
         }
     }
 }
