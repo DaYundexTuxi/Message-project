@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NLog;
 using Message_project.Interfaces;
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
     internal class FormsPhoneNumbersManager : IPhoneNumbersManager
     {
@@ -23,6 +23,11 @@ namespace Message_project.Classes
         public void fillThePhoneNumbersArray(string phoneNumbers)
         {
             enteredPhoneNumberArray = [.. phoneNumbers.Split(',').Select(phoneNum => phoneNum.Trim())];
+        }
+
+        public void clearPhoneNumbersArray()
+        {
+            enteredPhoneNumberArray = [];
         }
 
         public string getEnteredPhoneNumbers()
@@ -50,7 +55,7 @@ namespace Message_project.Classes
         {
             string messageText = messageGenerator.getGeneratedMessageText(themeId);
             loggerr.logInfo(messageText, fileLogger);
-            return $"{messageText}.";
+            return $"{messageText}";
         }
 
         // method to simply validate if phone number is real (exmpl. : 23544563)
@@ -71,17 +76,24 @@ namespace Message_project.Classes
         public int getThemeID(string theme)
         {
             // getting rid of spaces and apostrophes
-            theme.Replace(" ", "").Replace("'", "");
+            string cleanTheme = theme.Replace(" ", "").Replace("'", "");
 
             // default value for theme is 0 -> will cause an error
-            int id = 0; 
+            int id = 0;
+
+            //can get rid of it by lambda function -> var dictItem = MessageGenerator.themesDictionary.FirstOrDefault(t => t.value == theme.Trim())
+
             for (int i = 1; i <= messageGenerator.getThemesCount(); i++)
             {
-                if (MessageGenerator.themesDictionary[i] == theme)
+                string currentTheme = MessageGenerator.themesDictionary[i];
+
+                if (currentTheme.Trim() == cleanTheme)
                 {
                     id = i;
+                    break;
                 }
             }
+
             return id;
         }
     }

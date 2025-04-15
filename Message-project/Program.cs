@@ -3,7 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Message_project.Interfaces;
-using Message_project.Classes;
+using Message_project.Forms;
 
 // ADD FOLDERS - interfaces \ classes \ etc.
 // LOGS!!!!!!!! + dependency inj nlog lib
@@ -11,9 +11,9 @@ using Message_project.Classes;
 
 class Program
 {
+    [STAThread]
     static void Main(string[] args)
     {
-
         ServiceCollection? serviceCollection = new ServiceCollection();
 
         serviceCollection.AddScoped<IMessage, MessageGenerator>();

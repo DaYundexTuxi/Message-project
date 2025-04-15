@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
     internal class FileManager
     {

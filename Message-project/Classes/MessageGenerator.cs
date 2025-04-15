@@ -7,7 +7,7 @@ using Message_project.Interfaces;
 using NLog;
 
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
     // class only for generating messages as text to send them
     internal class MessageGenerator : IMessage
@@ -21,8 +21,7 @@ namespace Message_project.Classes
         {
             { 1, "Birthday" },
             { 2, "InternationalWomensday" },
-            { 3, "NewYear" },
-
+            { 3, "NewYear" }
         };
 
         // arrays of simple greetings 
@@ -53,6 +52,7 @@ namespace Message_project.Classes
             // log the desired message about the operation
             return themesString.Trim(); 
         }
+
         public int getThemesCount() { return themesDictionary.Count; }
 
         //  generating a message depending on needed theme (using random )
@@ -64,7 +64,7 @@ namespace Message_project.Classes
                 case "Birthday":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, I wish you hapiness and growing income!\n Best regards, your dear friend!!";
                     break;
-                case "InternationalWomensDay":
+                case "InternationalWomensday":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, have a lovely day and \n Best regards, your dear friend!!";
                     break;
                 case "NewYear":

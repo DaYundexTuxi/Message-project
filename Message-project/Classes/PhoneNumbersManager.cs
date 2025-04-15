@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Message_project.Interfaces;
 using NLog;
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
     internal class PhoneNumbersManager : IPhoneNumbersManager
     {

@@ -1,4 +1,4 @@
-﻿namespace Message_project.Classes
+﻿namespace Message_project.Forms
 {
     partial class MainForm
     {
@@ -37,14 +37,15 @@
             lbxResultOutput = new ListBox();
             lblResultMessages = new Label();
             clbListOfThemes = new CheckedListBox();
+            btnPastePhoneNumbers = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // SendMessages
             // 
-            SendMessages.Location = new Point(144, 52);
+            SendMessages.Location = new Point(144, 118);
             SendMessages.Name = "SendMessages";
-            SendMessages.Size = new Size(160, 60);
+            SendMessages.Size = new Size(257, 33);
             SendMessages.TabIndex = 0;
             SendMessages.Text = "Send messages";
             SendMessages.UseVisualStyleBackColor = true;
@@ -62,14 +63,15 @@
             // txtbPhoneNumbersInput
             // 
             txtbPhoneNumbersInput.Location = new Point(144, 23);
+            txtbPhoneNumbersInput.Multiline = true;
             txtbPhoneNumbersInput.Name = "txtbPhoneNumbersInput";
-            txtbPhoneNumbersInput.Size = new Size(510, 23);
+            txtbPhoneNumbersInput.Size = new Size(583, 60);
             txtbPhoneNumbersInput.TabIndex = 2;
             // 
             // lblInputedTheme
             // 
             lblInputedTheme.AutoSize = true;
-            lblInputedTheme.Location = new Point(3, 142);
+            lblInputedTheme.Location = new Point(3, 13);
             lblInputedTheme.Name = "lblInputedTheme";
             lblInputedTheme.Size = new Size(10, 15);
             lblInputedTheme.TabIndex = 3;
@@ -78,7 +80,7 @@
             // lblInputedPhoneNumbers
             // 
             lblInputedPhoneNumbers.AutoSize = true;
-            lblInputedPhoneNumbers.Location = new Point(3, 167);
+            lblInputedPhoneNumbers.Location = new Point(3, 38);
             lblInputedPhoneNumbers.Name = "lblInputedPhoneNumbers";
             lblInputedPhoneNumbers.Size = new Size(10, 15);
             lblInputedPhoneNumbers.TabIndex = 4;
@@ -86,26 +88,26 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(lbxResultOutput);
             panel1.Controls.Add(lblInputedPhoneNumbers);
+            panel1.Controls.Add(lbxResultOutput);
             panel1.Controls.Add(lblInputedTheme);
-            panel1.Location = new Point(144, 118);
+            panel1.Location = new Point(144, 157);
             panel1.Name = "panel1";
-            panel1.Size = new Size(510, 187);
+            panel1.Size = new Size(583, 274);
             panel1.TabIndex = 5;
             // 
             // lbxResultOutput
             // 
             lbxResultOutput.FormattingEnabled = true;
-            lbxResultOutput.Location = new Point(0, 0);
+            lbxResultOutput.Location = new Point(0, 60);
             lbxResultOutput.Name = "lbxResultOutput";
-            lbxResultOutput.Size = new Size(510, 139);
-            lbxResultOutput.TabIndex = 8;
+            lbxResultOutput.Size = new Size(583, 214);
+            lbxResultOutput.TabIndex = 8;            
             // 
             // lblResultMessages
             // 
             lblResultMessages.AutoSize = true;
-            lblResultMessages.Location = new Point(76, 118);
+            lblResultMessages.Location = new Point(76, 157);
             lblResultMessages.Name = "lblResultMessages";
             lblResultMessages.Size = new Size(47, 15);
             lblResultMessages.TabIndex = 6;
@@ -116,16 +118,27 @@
             clbListOfThemes.CheckOnClick = true;
             clbListOfThemes.FormattingEnabled = true;
             clbListOfThemes.Items.AddRange(new object[] { "Birthday", "International Women's day", "New Year" });
-            clbListOfThemes.Location = new Point(310, 54);
+            clbListOfThemes.Location = new Point(407, 91);
             clbListOfThemes.Name = "clbListOfThemes";
-            clbListOfThemes.Size = new Size(344, 58);
+            clbListOfThemes.Size = new Size(320, 58);
             clbListOfThemes.TabIndex = 7;
+            // 
+            // btnPastePhoneNumbers
+            // 
+            btnPastePhoneNumbers.Location = new Point(144, 89);
+            btnPastePhoneNumbers.Name = "btnPastePhoneNumbers";
+            btnPastePhoneNumbers.Size = new Size(257, 23);
+            btnPastePhoneNumbers.TabIndex = 8;
+            btnPastePhoneNumbers.Text = "Paste from clipboard";
+            btnPastePhoneNumbers.UseVisualStyleBackColor = true;
+            btnPastePhoneNumbers.Click += btnPastePhoneNumbers_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(676, 332);
+            ClientSize = new Size(752, 460);
+            Controls.Add(btnPastePhoneNumbers);
             Controls.Add(clbListOfThemes);
             Controls.Add(lblResultMessages);
             Controls.Add(SendMessages);
@@ -151,5 +164,6 @@
         private Label lblResultMessages;
         private CheckedListBox clbListOfThemes;
         private ListBox lbxResultOutput;
+        private Button btnPastePhoneNumbers;
     }
 }

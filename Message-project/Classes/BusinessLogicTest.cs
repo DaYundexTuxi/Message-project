@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Message_project.Interfaces;
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
     internal class BusinessLogicTest
     {
@@ -60,7 +60,8 @@ namespace Message_project.Classes
             NLog.LogManager.Shutdown();
         }
 
-        public void startActualProgram() // can't really make it static - handler won't work 
+        [STAThread] // need to use anything from clipboard
+        public void startActualProgram() 
         {
             // initialize form
             ApplicationConfiguration.Initialize();

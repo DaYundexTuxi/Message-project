@@ -7,7 +7,7 @@ using Message_project.Interfaces;
 using Microsoft.Extensions.Logging;
 using NLog;
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
     internal class FileLogger : Interfaces.ILogger
     {
