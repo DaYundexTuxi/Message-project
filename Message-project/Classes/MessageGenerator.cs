@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Message_project.interfaces;
+using Message_project.Interfaces;
 using NLog;
 
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
     // class only for generating messages as text to send them
     internal class MessageGenerator : IMessage
@@ -17,21 +17,23 @@ namespace Message_project.Classes
 
         // construction parts for the messages 
         // set of themes
-        static Dictionary<int, string> themesDictionary = new()
+        public readonly static Dictionary<int, string> themesDictionary = new()
         {
             { 1, "Birthday" },
-            { 2, "InternationalWomensDay" },
+            { 2, "InternationalWomensday" },
             { 3, "NewYear" }
         };
 
         // arrays of simple greetings 
-        string[] formalGreetingsArray = { "Hello", "Good day", "" }; // 
-        string[] informalGreetingsArray = { "Heya", "What\'s up?", "Hi" };
+        readonly string[] formalGreetingsArray = { "Hello", "Good day", "Good afternoon" }; // 
+        readonly string[] informalGreetingsArray = { "Heya", "What\'s up?", "Hi" };
 
-        // jus t
-        static string themesString;
-        public string messageText;
-        Random random = new();
+        // just fields for a few methods 
+        string themesString;
+        string messageText;
+
+        // instance for generating random 
+        readonly Random random = new();
 
         public string getThemesList()
         {
@@ -50,10 +52,11 @@ namespace Message_project.Classes
             // log the desired message about the operation
             return themesString.Trim(); 
         }
-        //public int getThemesCount() { return themesDictionary.Count; }
+
+        public int getThemesCount() { return themesDictionary.Count; }
 
         //  generating a message depending on needed theme (using random )
-        public string getGeneratedMessageText(int themeId, interfaces.ILogger fileLogger) 
+        public string getGeneratedMessageText(int themeId) 
         {
             string theme = themesDictionary[themeId];
             switch (theme)
@@ -61,14 +64,14 @@ namespace Message_project.Classes
                 case "Birthday":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, I wish you hapiness and growing income!\n Best regards, your dear friend!!";
                     break;
-                case "InternationalWomansDay":
+                case "InternationalWomensday":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, have a lovely day and \n Best regards, your dear friend!!";
                     break;
                 case "NewYear":
                     messageText = $"{formalGreetingsArray[random.NextInt64(0, formalGreetingsArray.Length)]}, I wish you happy new year!\n Best regards, your dear friend!!";
                     break;
             }
-            fileLogger.Log(messageText);
+            //fileLogger.Log(messageText);
             return messageText;
         }
     }

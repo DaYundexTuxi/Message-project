@@ -4,32 +4,39 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Message_project.Interfaces;
+using NLog;
 
-using Message_project.interfaces;
-
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
-    internal class PhoneNumbersManager
+    internal class PhoneNumbersManager : IPhoneNumbersManager
     {
+        // making an array for storing entered phone numbers (from fillThePhoneNumbersArray())
         public static string[] enteredPhoneNumberArray = { };
-        
+
+        // bool field for while cycle from fillThePhoneNumbersArray()
+        bool processOfEnteringNumbers;
+
         // creating an instance of MessageGenerator
         static readonly IMessage messageGenerator = new MessageGenerator();
 
         // creating logger
-        static ILogger fileLogger = new FileLogger();
+        private Logger fileLogger = NLog.LogManager.GetCurrentClassLogger();
+        private FileLogger loggerr = new FileLogger();
 
+        // empty constructor for handler
+        public PhoneNumbersManager() {}
+        
         // constructor for phone numbers to work further with them as objects of this class, not just an array of strings
         public PhoneNumbersManager(string phoneNumToProceedWith)
         {
             string phoneNumber = phoneNumToProceedWith;
         }
 
-        // give out the string of all 
-        public static string getEnteredPhoneNumbers()
+        // give out the string of all entered phone numbers
+        public string getEnteredPhoneNumbers()
         {
-                
-            string phoneNumberList = string.Empty;
+            string phoneNumberList = "";
             foreach (string phoneNumber in enteredPhoneNumberArray)
             {
                 phoneNumberList += $"{phoneNumber} \n";
@@ -37,23 +44,29 @@ namespace Message_project.Classes
             return phoneNumberList.Trim();
         }
 
-        // method for inputing phone numbers
-        public static void fillThePhoneNumbersArray(bool processOfEnteringNumbers)
+        public int getPhoneNumbersAmount()
         {
+            return enteredPhoneNumberArray.Length;
+        }
+
+        // method for inputing phone numbers
+        public void fillThePhoneNumbersArray(string a)
+        {
+            processOfEnteringNumbers = true;
             Console.WriteLine("Enter the desired phone numbers: ");
             Console.WriteLine("You can enter \'exit\' to exit the entering the numbers");
             while (processOfEnteringNumbers)
             {
-                string inputedText = Console.ReadLine();
+                string inputedPhoneNumber = Console.ReadLine();
 
-                if (inputedText == "exit")
+                if (inputedPhoneNumber == "exit")
                 {
                     break;
                 }
-                else if (isValid(inputedText))
+                else if (isValid(inputedPhoneNumber))
                 {
-                    enteredPhoneNumberArray = enteredPhoneNumberArray.Concat(new string[] { inputedText }).ToArray(); // creates a new array and adds to it 
-                    fileLogger.Log("");
+                    enteredPhoneNumberArray = enteredPhoneNumberArray.Concat([inputedPhoneNumber]).ToArray(); // creates a new array and adds inputedPhoneNumber to it
+                    //fileLogger.Log("");
                 }
                 else
                 {
@@ -63,18 +76,36 @@ namespace Message_project.Classes
         }
 
         // get's the messagetext to send by passing the theme ID
-        public static string getTheMessage(int themeId, ILogger fileLogger)
+        public string getTheMessage(int themeId) // , ILogger fileLogger
         {
-            string messageText = messageGenerator.getGeneratedMessageText(themeId, fileLogger); // HERE IT'S USED
+            string messageText = messageGenerator.getGeneratedMessageText(themeId);
+            loggerr.logInfo(messageText, fileLogger);
             return $"On the  was sent a message. Text follows: \"{messageText}\".";
         }
 
         // func to check if the phone number is valid (example: 20100230)
-        public static bool isValid(string pNumberToCheck) 
+        public bool isValid(string pNumberToCheck) 
         {
-            bool funcValue = pNumberToCheck.Length == 8 && pNumberToCheck[0] == '2' ? true : false;
-            return funcValue;
+            if (pNumberToCheck == null)
+            {
+                return false;
+            }
+            else 
+            {
+                bool funcValue = pNumberToCheck.Length == 8 && pNumberToCheck[0] == '2';
+                return funcValue;
+            }
             //in the future 
+        }
+
+        public int getThemeID(string theme)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getPhoneNumberByArrayID(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

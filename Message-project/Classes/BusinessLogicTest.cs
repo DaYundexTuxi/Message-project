@@ -3,28 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Message_project.interfaces;
+using Message_project.Interfaces;
 
-namespace Message_project.Classes
+namespace Message_project.Forms
 {
-    internal class ConsoleBusinessLogicTest
+    internal class BusinessLogicTest
     {
         private readonly IMessage _mg;
         private readonly ILogger _logger;
+        private readonly IPhoneNumbersManager _phoneNumbersManager;
 
-
-        public ConsoleBusinessLogicTest(IMessage mg, ILogger logger)
+        public BusinessLogicTest(IMessage mg, ILogger logger, IPhoneNumbersManager phoneNumbersManager)
         {
             _mg = mg;
             _logger = logger;
+            _phoneNumbersManager = phoneNumbersManager;
         }
 
         public void test()
         {
-            PhoneNumbersManager.fillThePhoneNumbersArray(true);
+            var fileLogger = NLog.LogManager.GetCurrentClassLogger();
+            _logger.logInfo("Test started!", fileLogger);
+
+            // start of the program
+            _phoneNumbersManager.fillThePhoneNumbersArray("");
 
             // showing the list of entered phone numbers
-            Console.WriteLine(PhoneNumbersManager.getEnteredPhoneNumbers());
+            Console.WriteLine(_phoneNumbersManager.getEnteredPhoneNumbers());
 
             //asking for sending email 
             Console.Write($"You have entered {PhoneNumbersManager.enteredPhoneNumberArray.Length} phone numbers, do you want to send them an sms?(y/n): ");
@@ -43,13 +48,24 @@ namespace Message_project.Classes
                 foreach (string individualPhoneNumber in PhoneNumbersManager.enteredPhoneNumberArray)
                 {
                     PhoneNumbersManager usedPhoneNumber = new PhoneNumbersManager(individualPhoneNumber);
-                    Console.WriteLine(PhoneNumbersManager.getTheMessage(enteredTheme));
+                    Console.WriteLine(_phoneNumbersManager.getTheMessage(enteredTheme));
                 }
             }
             else
             {
-                Console.WriteLine("ok-");
+                Console.WriteLine("Goodbye.");
             }
+
+            _logger.logInfo("Test executed!", fileLogger);
+            NLog.LogManager.Shutdown();
+        }
+
+        [STAThread] // need to use anything from clipboard
+        public void startActualProgram() 
+        {
+            // initialize form
+            ApplicationConfiguration.Initialize();
+            Application.Run(new MainForm());
         }
     }
 }

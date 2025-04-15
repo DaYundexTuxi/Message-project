@@ -2,29 +2,30 @@
 //using
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ConsoleDI.Example;
-using Message_project.interfaces;
-using Message_project.Classes;
+using Message_project.Interfaces;
+using Message_project.Forms;
 
 // ADD FOLDERS - interfaces \ classes \ etc.
 // LOGS!!!!!!!! + dependency inj nlog lib
-// 
+// make a filemanager that will use data recieved via file (ejson)
 
 class Program
 {
-
+    [STAThread]
     static void Main(string[] args)
     {
         ServiceCollection? serviceCollection = new ServiceCollection();
 
         serviceCollection.AddScoped<IMessage, MessageGenerator>();
         serviceCollection.AddScoped<ILogger, FileLogger>();
-        serviceCollection.AddScoped<ConsoleBusinessLogicTest>();
+        serviceCollection.AddScoped<IPhoneNumbersManager, PhoneNumbersManager>();
+        serviceCollection.AddScoped<BusinessLogicTest>();
 
         ServiceProvider? serviceProvider = serviceCollection.BuildServiceProvider();
 
-        ConsoleBusinessLogicTest? handler = serviceProvider.GetService<ConsoleBusinessLogicTest>();
+        BusinessLogicTest? handler = serviceProvider.GetService<BusinessLogicTest>();
 
-        handler.test();
+        handler.startActualProgram();
+        //handler.test();
     }
 }
