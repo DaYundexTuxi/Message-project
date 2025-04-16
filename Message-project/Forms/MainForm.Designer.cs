@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             SendMessages = new Button();
-            label1 = new Label();
+            lblPhoneNumbersText = new Label();
             txtbPhoneNumbersInput = new TextBox();
             lblInputedTheme = new Label();
             lblInputedPhoneNumbers = new Label();
@@ -51,14 +51,14 @@
             SendMessages.UseVisualStyleBackColor = true;
             SendMessages.Click += SendMessages_Click;
             // 
-            // label1
+            // lblPhoneNumbersText
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(29, 26);
-            label1.Name = "label1";
-            label1.Size = new Size(94, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Phone numbers:";
+            lblPhoneNumbersText.AutoSize = true;
+            lblPhoneNumbersText.Location = new Point(29, 26);
+            lblPhoneNumbersText.Name = "lblPhoneNumbersText";
+            lblPhoneNumbersText.Size = new Size(94, 15);
+            lblPhoneNumbersText.TabIndex = 1;
+            lblPhoneNumbersText.Text = "Phone numbers:";
             // 
             // txtbPhoneNumbersInput
             // 
@@ -71,7 +71,7 @@
             // lblInputedTheme
             // 
             lblInputedTheme.AutoSize = true;
-            lblInputedTheme.Location = new Point(3, 13);
+            lblInputedTheme.Location = new Point(115, 10);
             lblInputedTheme.Name = "lblInputedTheme";
             lblInputedTheme.Size = new Size(10, 15);
             lblInputedTheme.TabIndex = 3;
@@ -80,7 +80,7 @@
             // lblInputedPhoneNumbers
             // 
             lblInputedPhoneNumbers.AutoSize = true;
-            lblInputedPhoneNumbers.Location = new Point(3, 38);
+            lblInputedPhoneNumbers.Location = new Point(115, 37);
             lblInputedPhoneNumbers.Name = "lblInputedPhoneNumbers";
             lblInputedPhoneNumbers.Size = new Size(10, 15);
             lblInputedPhoneNumbers.TabIndex = 4;
@@ -88,26 +88,28 @@
             // 
             // panel1
             // 
+            panel1.BackColor = SystemColors.ControlLight;
             panel1.Controls.Add(lblInputedPhoneNumbers);
             panel1.Controls.Add(lbxResultOutput);
+            panel1.Controls.Add(lblResultMessages);
             panel1.Controls.Add(lblInputedTheme);
-            panel1.Location = new Point(144, 157);
+            panel1.Location = new Point(29, 157);
             panel1.Name = "panel1";
-            panel1.Size = new Size(583, 274);
+            panel1.Size = new Size(698, 274);
             panel1.TabIndex = 5;
             // 
             // lbxResultOutput
             // 
             lbxResultOutput.FormattingEnabled = true;
-            lbxResultOutput.Location = new Point(0, 60);
+            lbxResultOutput.Location = new Point(66, 55);
             lbxResultOutput.Name = "lbxResultOutput";
-            lbxResultOutput.Size = new Size(583, 214);
-            lbxResultOutput.TabIndex = 8;            
+            lbxResultOutput.Size = new Size(629, 214);
+            lbxResultOutput.TabIndex = 8;
             // 
             // lblResultMessages
             // 
             lblResultMessages.AutoSize = true;
-            lblResultMessages.Location = new Point(76, 157);
+            lblResultMessages.Location = new Point(17, 25);
             lblResultMessages.Name = "lblResultMessages";
             lblResultMessages.Size = new Size(47, 15);
             lblResultMessages.TabIndex = 6;
@@ -140,11 +142,10 @@
             ClientSize = new Size(752, 460);
             Controls.Add(btnPastePhoneNumbers);
             Controls.Add(clbListOfThemes);
-            Controls.Add(lblResultMessages);
             Controls.Add(SendMessages);
             Controls.Add(panel1);
             Controls.Add(txtbPhoneNumbersInput);
-            Controls.Add(label1);
+            Controls.Add(lblPhoneNumbersText);
             Name = "MainForm";
             Text = "Message sender program";
             panel1.ResumeLayout(false);
@@ -156,7 +157,7 @@
         #endregion
 
         private Button SendMessages;
-        private Label label1;
+        private Label lblPhoneNumbersText;
         private TextBox txtbPhoneNumbersInput;
         private Label lblInputedTheme;
         private Label lblInputedPhoneNumbers;

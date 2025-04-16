@@ -15,7 +15,8 @@ namespace Message_project.Forms
         private FormsPhoneNumbersManager formsPhoneNumbersManager = new();
 
         private List<string> messagesToSend = [];
-
+        
+        // method to fill List of messages that need to be sended 
         public List<string> sendMessage(string phoneNumbers, string messageTheme)
         {
             // loop to enter generated message in to the list to send it back
@@ -24,15 +25,15 @@ namespace Message_project.Forms
                 string message = formsPhoneNumbersManager.getTheMessage(formsPhoneNumbersManager.getThemeID(messageTheme));
                 string usedPhoneNumber = formsPhoneNumbersManager.getPhoneNumberByArrayID(i);
 
-                string generatedMessage = $"Message to {usedPhoneNumber}: {message}";
+                string generatedMessage = message;
 
                 messagesToSend.Add(generatedMessage);
             }
 
             return messagesToSend;
-
         }
         
+        // get and return string of phone numbers by validating them to get actuall phone numbers 
         public string getValidatedPhoneNumbers(string phoneNumbers)
         {
             string validatedPhoneNumbers = "";
@@ -50,7 +51,7 @@ namespace Message_project.Forms
                 }
             }
 
-            // getting rid of ", " on the end only if there's any numbers in list
+            // getting rid of ", " on the end ONLY if there're any numbers on the list
             if (validatedPhoneNumbers.Length > 0)
             {
                 validatedPhoneNumbers = validatedPhoneNumbers.Remove(validatedPhoneNumbers.Length - 2);
@@ -59,6 +60,7 @@ namespace Message_project.Forms
             return validatedPhoneNumbers;
         } 
 
+        // clear the list of messages
         public void clearMessagesToSend()
         {
             messagesToSend.Clear();

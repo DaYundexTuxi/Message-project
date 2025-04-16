@@ -7,10 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Windows.System.UserProfile;
+
+using Message_project.Interfaces;
 
 using System.IO.Ports;
-using Message_project.Interfaces;
+using System.Threading;
+using Windows.Devices.SerialCommunication;
+using Windows.Devices.Enumeration;
+using Windows.Storage.Streams;
 
 //using NLog;
 
@@ -32,20 +36,15 @@ namespace Message_project.Forms
             InitializeComponent();
         }
 
-        private void SendMessages_Click(object sender, EventArgs e)
+        // take numbers, divide them from one string to substrings, send each a message and show number and the message + have a choice between 3 themes      
+        private async Task SendMessages_Click(object sender, EventArgs e)
         {
-            // take numbers, divide them from one string to substrings, send each a message and show number and the message + have a choice between 3 
-
-            // clear fillef themes and phoneNumbers labels
-            lblInputedTheme.Text = "";
-            lblInputedPhoneNumbers.Text = "";
-
-            // clear textbox for numbers and for themes
-            //txtbPhoneNumbersInput.Text = "";
-
+            // button for message box
             MessageBoxButtons btnOK = MessageBoxButtons.OK;
 
-
+            // clear filled themes and phoneNumbers labels
+            lblInputedTheme.Text = "";
+            lblInputedPhoneNumbers.Text = "";
 
             string validatedPhoneNumbers = _buttonOperations.getValidatedPhoneNumbers(txtbPhoneNumbersInput.Text);
 
@@ -57,6 +56,9 @@ namespace Message_project.Forms
 
                 List<string> sendedMessages = _buttonOperations.sendMessage(validatedPhoneNumbers, chosenTheme);
 
+                lblInputedTheme.Text = "Theme: " + chosenTheme;
+                lblInputedPhoneNumbers.Text = "Phone numbers: " + validatedPhoneNumbers;
+
                 foreach (string listItem in sendedMessages)
                 {
                     lbxResultOutput.Items.Add(listItem);
@@ -64,6 +66,36 @@ namespace Message_project.Forms
 
                 _phoneNumbersManager.clearPhoneNumbersArray();
                 _buttonOperations.clearMessagesToSend();
+
+                // -------------------------------------------- comment all code in this method below to see how it works right now
+
+                DeviceInformationCollection serialDeviceInfos = await DeviceInformation.FindAllAsync(SerialDevice.GetDeviceSelector());
+
+                foreach (DeviceInformation serialDeviceInfo in serialDeviceInfos)
+                {
+                    try
+                    {
+                        SerialDevice serialDevice = await SerialDevice.FromIdAsync(serialDeviceInfo.Id);
+
+                        if (serialDevice != null)
+                        {
+                            // Found a valid serial device.
+
+                            // Reading a byte from the serial device.
+                            DataReader dr = new DataReader(serialDevice.InputStream);
+                            int readByte = dr.ReadByte();
+
+                            // Writing a byte to the serial device.
+                            DataWriter dw = new DataWriter(serialDevice.OutputStream);
+                            dw.WriteByte(0x42);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Couldn't instantiate the device
+                    }
+                }
+
             }
             else
             {
