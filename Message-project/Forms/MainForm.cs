@@ -31,13 +31,14 @@ namespace Message_project.Forms
         // will be used for random delay for sending message - not done!
         Random rnd = new Random();
 
+
         public MainForm()
         {
             InitializeComponent();
         }
 
         // take numbers, divide them from one string to substrings, send each a message and show number and the message + have a choice between 3 themes      
-        private async Task SendMessages_Click(object sender, EventArgs e)
+        private void SendMessages_Click(object sender, EventArgs e)
         {
             // button for message box
             MessageBoxButtons btnOK = MessageBoxButtons.OK;
@@ -69,33 +70,34 @@ namespace Message_project.Forms
 
                 // -------------------------------------------- comment all code in this method below to see how it works right now
 
-                DeviceInformationCollection serialDeviceInfos = await DeviceInformation.FindAllAsync(SerialDevice.GetDeviceSelector());
+                //DeviceInformationCollection serialDeviceInfos = DeviceInformation.FindAllAsync(SerialDevice.GetDeviceSelector());
 
-                foreach (DeviceInformation serialDeviceInfo in serialDeviceInfos)
-                {
-                    try
-                    {
-                        SerialDevice serialDevice = await SerialDevice.FromIdAsync(serialDeviceInfo.Id);
+                //foreach (DeviceInformation serialDeviceInfo in serialDeviceInfos)
+                //{
+                //    try
+                //    {
+                //        SerialDevice serialDevice = SerialDevice.FromIdAsync(serialDeviceInfo.Id);
 
-                        if (serialDevice != null)
-                        {
-                            // Found a valid serial device.
+                //        if (serialDevice != null)
+                //        {
+                //            // Found a valid serial device.
 
-                            // Reading a byte from the serial device.
-                            DataReader dr = new DataReader(serialDevice.InputStream);
-                            int readByte = dr.ReadByte();
+                //            // Reading a byte from the serial device.
+                //            DataReader dr = new DataReader(serialDevice.InputStream);
+                //            int readByte = dr.ReadByte();
 
-                            // Writing a byte to the serial device.
-                            DataWriter dw = new DataWriter(serialDevice.OutputStream);
-                            dw.WriteByte(0x42);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // Couldn't instantiate the device
-                    }
-                }
+                //            // Writing a byte to the serial device.
+                //            DataWriter dw = new DataWriter(serialDevice.OutputStream);
+                //            dw.WriteByte(0x42);
+                //        }
+                //    }
+                //    catch (Exception)
+                //    {
+                //        // Couldn't instantiate the device
+                //    }
+                //}
 
+                // ---------------------------------------------- comment untill this point 
             }
             else
             {
@@ -109,5 +111,12 @@ namespace Message_project.Forms
             txtbPhoneNumbersInput.Text = Clipboard.GetText();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            CheckForReplies checker = new CheckForReplies();
+            checker.CheckForReplies += ;
+
+            checker.StartAsync();
+        }
     }
 }

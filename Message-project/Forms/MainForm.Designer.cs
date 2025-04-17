@@ -148,6 +148,7 @@
             Controls.Add(lblPhoneNumbersText);
             Name = "MainForm";
             Text = "Message sender program";
+            Load += MainForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
