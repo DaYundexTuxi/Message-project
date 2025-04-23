@@ -33,19 +33,21 @@
             txtbPhoneNumbersInput = new TextBox();
             lblInputedTheme = new Label();
             lblInputedPhoneNumbers = new Label();
-            panel1 = new Panel();
-            lbxResultOutput = new ListBox();
             lblResultMessages = new Label();
             clbListOfThemes = new CheckedListBox();
             btnPastePhoneNumbers = new Button();
-            panel1.SuspendLayout();
+            lblMessage = new Label();
+            rtbCustomMessage = new RichTextBox();
+            lbxResultOutput = new ListBox();
+            textBox1 = new TextBox();
+            lblTimeToSend = new Label();
             SuspendLayout();
             // 
             // SendMessages
             // 
-            SendMessages.Location = new Point(144, 118);
+            SendMessages.Location = new Point(270, 383);
             SendMessages.Name = "SendMessages";
-            SendMessages.Size = new Size(257, 33);
+            SendMessages.Size = new Size(226, 65);
             SendMessages.TabIndex = 0;
             SendMessages.Text = "Send messages";
             SendMessages.UseVisualStyleBackColor = true;
@@ -62,16 +64,16 @@
             // 
             // txtbPhoneNumbersInput
             // 
-            txtbPhoneNumbersInput.Location = new Point(144, 23);
+            txtbPhoneNumbersInput.Location = new Point(29, 52);
             txtbPhoneNumbersInput.Multiline = true;
             txtbPhoneNumbersInput.Name = "txtbPhoneNumbersInput";
-            txtbPhoneNumbersInput.Size = new Size(583, 60);
+            txtbPhoneNumbersInput.Size = new Size(190, 242);
             txtbPhoneNumbersInput.TabIndex = 2;
             // 
             // lblInputedTheme
             // 
             lblInputedTheme.AutoSize = true;
-            lblInputedTheme.Location = new Point(115, 10);
+            lblInputedTheme.Location = new Point(601, 7);
             lblInputedTheme.Name = "lblInputedTheme";
             lblInputedTheme.Size = new Size(10, 15);
             lblInputedTheme.TabIndex = 3;
@@ -80,36 +82,16 @@
             // lblInputedPhoneNumbers
             // 
             lblInputedPhoneNumbers.AutoSize = true;
-            lblInputedPhoneNumbers.Location = new Point(115, 37);
+            lblInputedPhoneNumbers.Location = new Point(601, 34);
             lblInputedPhoneNumbers.Name = "lblInputedPhoneNumbers";
             lblInputedPhoneNumbers.Size = new Size(10, 15);
             lblInputedPhoneNumbers.TabIndex = 4;
             lblInputedPhoneNumbers.Text = " ";
             // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ControlLight;
-            panel1.Controls.Add(lblInputedPhoneNumbers);
-            panel1.Controls.Add(lbxResultOutput);
-            panel1.Controls.Add(lblResultMessages);
-            panel1.Controls.Add(lblInputedTheme);
-            panel1.Location = new Point(29, 157);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(698, 274);
-            panel1.TabIndex = 5;
-            // 
-            // lbxResultOutput
-            // 
-            lbxResultOutput.FormattingEnabled = true;
-            lbxResultOutput.Location = new Point(66, 55);
-            lbxResultOutput.Name = "lbxResultOutput";
-            lbxResultOutput.Size = new Size(629, 214);
-            lbxResultOutput.TabIndex = 8;
-            // 
             // lblResultMessages
             // 
             lblResultMessages.AutoSize = true;
-            lblResultMessages.Location = new Point(17, 25);
+            lblResultMessages.Location = new Point(539, 26);
             lblResultMessages.Name = "lblResultMessages";
             lblResultMessages.Size = new Size(47, 15);
             lblResultMessages.TabIndex = 6;
@@ -120,37 +102,83 @@
             clbListOfThemes.CheckOnClick = true;
             clbListOfThemes.FormattingEnabled = true;
             clbListOfThemes.Items.AddRange(new object[] { "Birthday", "International Women's day", "New Year" });
-            clbListOfThemes.Location = new Point(407, 91);
+            clbListOfThemes.Location = new Point(270, 309);
             clbListOfThemes.Name = "clbListOfThemes";
-            clbListOfThemes.Size = new Size(320, 58);
+            clbListOfThemes.Size = new Size(226, 58);
             clbListOfThemes.TabIndex = 7;
             // 
             // btnPastePhoneNumbers
             // 
-            btnPastePhoneNumbers.Location = new Point(144, 89);
+            btnPastePhoneNumbers.Location = new Point(29, 309);
             btnPastePhoneNumbers.Name = "btnPastePhoneNumbers";
-            btnPastePhoneNumbers.Size = new Size(257, 23);
+            btnPastePhoneNumbers.Size = new Size(190, 23);
             btnPastePhoneNumbers.TabIndex = 8;
             btnPastePhoneNumbers.Text = "Paste from clipboard";
             btnPastePhoneNumbers.UseVisualStyleBackColor = true;
             btnPastePhoneNumbers.Click += btnPastePhoneNumbers_Click;
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.Location = new Point(270, 26);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(56, 15);
+            lblMessage.TabIndex = 9;
+            lblMessage.Text = "Message:";
+            // 
+            // rtbCustomMessage
+            // 
+            rtbCustomMessage.Location = new Point(270, 52);
+            rtbCustomMessage.Name = "rtbCustomMessage";
+            rtbCustomMessage.Size = new Size(226, 242);
+            rtbCustomMessage.TabIndex = 10;
+            rtbCustomMessage.Text = "";
+            // 
+            // lbxResultOutput
+            // 
+            lbxResultOutput.FormattingEnabled = true;
+            lbxResultOutput.Location = new Point(539, 52);
+            lbxResultOutput.Name = "lbxResultOutput";
+            lbxResultOutput.Size = new Size(411, 319);
+            lbxResultOutput.TabIndex = 8;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(108, 363);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(111, 23);
+            textBox1.TabIndex = 11;
+            // 
+            // lblTimeToSend
+            // 
+            lblTimeToSend.AutoSize = true;
+            lblTimeToSend.Location = new Point(29, 366);
+            lblTimeToSend.Name = "lblTimeToSend";
+            lblTimeToSend.Size = new Size(86, 15);
+            lblTimeToSend.TabIndex = 12;
+            lblTimeToSend.Text = "TimeToSend(h)";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(752, 460);
+            ClientSize = new Size(973, 460);
+            Controls.Add(lblTimeToSend);
+            Controls.Add(textBox1);
+            Controls.Add(lbxResultOutput);
+            Controls.Add(lblInputedPhoneNumbers);
+            Controls.Add(rtbCustomMessage);
+            Controls.Add(lblResultMessages);
+            Controls.Add(lblMessage);
+            Controls.Add(lblInputedTheme);
             Controls.Add(btnPastePhoneNumbers);
             Controls.Add(clbListOfThemes);
             Controls.Add(SendMessages);
-            Controls.Add(panel1);
             Controls.Add(txtbPhoneNumbersInput);
             Controls.Add(lblPhoneNumbersText);
             Name = "MainForm";
             Text = "Message sender program";
             Load += MainForm_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -162,10 +190,13 @@
         private TextBox txtbPhoneNumbersInput;
         private Label lblInputedTheme;
         private Label lblInputedPhoneNumbers;
-        private Panel panel1;
         private Label lblResultMessages;
         private CheckedListBox clbListOfThemes;
-        private ListBox lbxResultOutput;
         private Button btnPastePhoneNumbers;
+        private Label lblMessage;
+        private RichTextBox rtbCustomMessage;
+        private ListBox lbxResultOutput;
+        private TextBox textBox1;
+        private Label lblTimeToSend;
     }
 }

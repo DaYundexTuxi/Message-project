@@ -26,31 +26,24 @@ namespace Message_project.Forms
         // This method runs until the cancellation token is requested.
         public async Task StartAsync()
         {
-            // Record the start time.
             DateTime lastEventTime = DateTime.Now;
-
-            // Create a Random instance to generate time intervals.
             Random random = new Random();
 
             try
             {
-                // Continue until cancellation is requested.
                 while (!_cts.Token.IsCancellationRequested)
                 {
-                    // Generate a random delay between 1 and 5 minutes (in milliseconds).
-                    int delay = random.Next(1 * 30 * 1000, 1 * 60 * 1000);
+                    // setting a delay for a 
+                    int delay = random.Next(10 * 1000, 20 * 1000);
                     await Task.Delay(delay, _cts.Token);
 
-                    // not sure if i need this
-                    // Calculate elapsed time since the last event was fired.
-                    DateTime currentTime = DateTime.Now;
-                    TimeSpan elapsedTime = currentTime - lastEventTime;
-                    lastEventTime = currentTime;
+                    // Вызываем событие, уведомляя подписчиков.
+                    OnCheckForReplies(true);
                 }
             }
             catch (TaskCanceledException)
             {
-                // Handle the cancellation gracefully if needed.
+                // Обработка отмены (если нужно).
             }
         }
 
@@ -61,7 +54,7 @@ namespace Message_project.Forms
         }
 
         // Protected virtual method to raise the event.
-        protected virtual void OnTimeElapsed(bool checkForReplies)
+        protected virtual void OnCheckForReplies(bool checkForReplies)
         {
             CheckForRepliesEvent?.Invoke(this, checkForReplies);
         }
