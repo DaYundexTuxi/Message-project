@@ -52,6 +52,12 @@ namespace Message_project.Forms
             // sending inputed phone numbers and returning only validated (e.g. 20394823) 
             string validatedPhoneNumbers = _buttonOperations.getValidatedPhoneNumbers(txtbPhoneNumbersInput.Text);
 
+            if (validatedPhoneNumbers == "")
+            {
+                MessageBox.Show("You don\'t have corrent phone number", "Phone error", btnOK, MessageBoxIcon.Error);
+                return;
+            }
+
             // if statement to chose what exact method to use - pre-generated mesage or a custom one
             if (clbListOfThemes.CheckedItems.Count == 1 && validatedPhoneNumbers != "" && rtbCustomMessage.Text == "")
             {

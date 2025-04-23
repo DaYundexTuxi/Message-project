@@ -144,9 +144,9 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(108, 363);
+            textBox1.Location = new Point(121, 363);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(111, 23);
+            textBox1.Size = new Size(98, 23);
             textBox1.TabIndex = 11;
             // 
             // lblTimeToSend
