@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             SendMessages = new Button();
             lblPhoneNumbersText = new Label();
             txtbPhoneNumbersInput = new TextBox();
@@ -38,9 +39,10 @@
             btnPastePhoneNumbers = new Button();
             lblMessage = new Label();
             rtbCustomMessage = new RichTextBox();
-            lbxResultOutput = new ListBox();
-            textBox1 = new TextBox();
+            txtbSendDelay = new TextBox();
             lblTimeToSend = new Label();
+            txtbResults = new TextBox();
+            toolTip1 = new ToolTip(components);
             SuspendLayout();
             // 
             // SendMessages
@@ -69,6 +71,7 @@
             txtbPhoneNumbersInput.Name = "txtbPhoneNumbersInput";
             txtbPhoneNumbersInput.Size = new Size(190, 242);
             txtbPhoneNumbersInput.TabIndex = 2;
+            toolTip1.SetToolTip(txtbPhoneNumbersInput, "Here will be used only valid ones - e.g. 20000000");
             // 
             // lblInputedTheme
             // 
@@ -134,20 +137,12 @@
             rtbCustomMessage.TabIndex = 10;
             rtbCustomMessage.Text = "";
             // 
-            // lbxResultOutput
+            // txtbSendDelay
             // 
-            lbxResultOutput.FormattingEnabled = true;
-            lbxResultOutput.Location = new Point(539, 52);
-            lbxResultOutput.Name = "lbxResultOutput";
-            lbxResultOutput.Size = new Size(411, 319);
-            lbxResultOutput.TabIndex = 8;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(121, 363);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(98, 23);
-            textBox1.TabIndex = 11;
+            txtbSendDelay.Location = new Point(121, 363);
+            txtbSendDelay.Name = "txtbSendDelay";
+            txtbSendDelay.Size = new Size(98, 23);
+            txtbSendDelay.TabIndex = 11;
             // 
             // lblTimeToSend
             // 
@@ -158,14 +153,24 @@
             lblTimeToSend.TabIndex = 12;
             lblTimeToSend.Text = "TimeToSend(h)";
             // 
+            // txtbResults
+            // 
+            txtbResults.Location = new Point(539, 52);
+            txtbResults.Multiline = true;
+            txtbResults.Name = "txtbResults";
+            txtbResults.ReadOnly = true;
+            txtbResults.ScrollBars = ScrollBars.Vertical;
+            txtbResults.Size = new Size(422, 396);
+            txtbResults.TabIndex = 13;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(973, 460);
+            Controls.Add(txtbResults);
             Controls.Add(lblTimeToSend);
-            Controls.Add(textBox1);
-            Controls.Add(lbxResultOutput);
+            Controls.Add(txtbSendDelay);
             Controls.Add(lblInputedPhoneNumbers);
             Controls.Add(rtbCustomMessage);
             Controls.Add(lblResultMessages);
@@ -195,8 +200,9 @@
         private Button btnPastePhoneNumbers;
         private Label lblMessage;
         private RichTextBox rtbCustomMessage;
-        private ListBox lbxResultOutput;
-        private TextBox textBox1;
+        private TextBox txtbSendDelay;
         private Label lblTimeToSend;
+        private TextBox txtbResults;
+        private ToolTip toolTip1;
     }
 }

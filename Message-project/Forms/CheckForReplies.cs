@@ -33,8 +33,8 @@ namespace Message_project.Forms
             {
                 while (!_cts.Token.IsCancellationRequested)
                 {
-                    // setting a delay for a 
-                    int delay = random.Next(10 * 1000, 20 * 1000);
+                    // setting a a random delay between 30 and 60 seconds (in milliseconds)
+                    int delay = random.Next(30 * 1000, 60 * 1000);
                     await Task.Delay(delay, _cts.Token);
 
                     // Вызываем событие, уведомляя подписчиков.

@@ -28,6 +28,7 @@ namespace Message_project.Forms
         // some fields just for button functions
         private readonly FormsPhoneNumbersManager _phoneNumbersManager = new();
         private readonly ButtonOperations _buttonOperations = new();
+        double inputedSendDelay = 0d;
 
         // field to get subscribed for event and use it 
         private CheckForReplies _checkForReplies;
@@ -42,24 +43,61 @@ namespace Message_project.Forms
         // the main function of the program - send a pre-generated message, or a custom one to inputed phone numbers by choosing a theme or\and entering numbers
         private void SendMessages_Click(object sender, EventArgs e)
         {
+
             // declarting a OKbutton for message box
             MessageBoxButtons btnOK = MessageBoxButtons.OK;
 
-            // clear filled themes and phoneNumbers labels
+            // clear filled themes and phoneNumbers labels - displaying used phone numbers and (if used) theme
             lblInputedTheme.Text = "";
             lblInputedPhoneNumbers.Text = "";
             
-            // sending inputed phone numbers and returning only validated (e.g. 20394823) 
+            // using inputed phone numbers and getting back string of only validated numbers (e.g. 20394823) 
             string validatedPhoneNumbers = _buttonOperations.getValidatedPhoneNumbers(txtbPhoneNumbersInput.Text);
+            // writing down the send delay for message
+            string sendDelayString = "";
 
+            // stops method in case when there's no entered phone numbers
             if (validatedPhoneNumbers == "")
             {
-                MessageBox.Show("You don\'t have corrent phone number", "Phone error", btnOK, MessageBoxIcon.Error);
+                MessageBox.Show("You don\'t have any correсt phone number entered. Check them please.", "Phone error", btnOK, MessageBoxIcon.Error);
                 return;
             }
 
-            // if statement to chose what exact method to use - pre-generated mesage or a custom one
-            if (clbListOfThemes.CheckedItems.Count == 1 && validatedPhoneNumbers != "" && rtbCustomMessage.Text == "")
+            if (clbListOfThemes.CheckedItems.Count == 1 && rtbCustomMessage.Text != "")
+            {
+                MessageBox.Show("You can\'t send a custom written message with a theme", "Wrong message writing usage", btnOK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (clbListOfThemes.CheckedItems.Count == 0 && rtbCustomMessage.Text == "")
+            {
+                MessageBox.Show("You need to either choose a theme or write a custom message.", "No message to send", btnOK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (clbListOfThemes.CheckedItems.Count > 1)
+            {
+                MessageBox.Show("You can\'t use more than 1 theme", "Wrong theme choice usage", btnOK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // checking if user entered the delay right - if yes, using it
+            if (txtbSendDelay.Text != "")
+            {
+                try
+                {
+                    double inputedSendDelay = Convert.ToDouble(txtbSendDelay.Text);
+                    sendDelayString = "(" + txtbSendDelay.Text + ")";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("You need to write down right time to send", "Wrong send delay usage", btnOK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            
+            // if statement to chose what exact method to use - pre-generated message or a custom one
+            if (clbListOfThemes.CheckedItems.Count == 1 && rtbCustomMessage.Text == "")
             {
                 // the pre-generated messages variant 
                 string chosenTheme = clbListOfThemes.CheckedItems[0].ToString();
@@ -72,15 +110,20 @@ namespace Message_project.Forms
                 lblInputedTheme.Text = "Theme: " + chosenTheme;
                 lblInputedPhoneNumbers.Text = "Phone numbers: " + validatedPhoneNumbers;
 
-                foreach (string listItem in sendedMessages)
+                for (int i = 0; i < sendedMessages.Count; i++)
                 {
-                    lbxResultOutput.Items.Add(listItem);
+                    txtbResults.Text += $"Message ({_phoneNumbersManager.getPhoneNumberByArrayID(i)}): {sendedMessages[i]}"  + "\r\n";
                 }
 
+                /* here is needed part of code that actually sends the messages using delay (inputedSendDelay)
+                    
+                */
+
+                // clearing array with used, not needed information for further use
                 _phoneNumbersManager.clearPhoneNumbersArray();
                 _buttonOperations.clearMessagesToSend();
             } 
-            else if (clbListOfThemes.CheckedItems.Count == 0 && validatedPhoneNumbers != "" && rtbCustomMessage.Text != "")
+            else 
             {
                 // the custom message variant
                 lblInputedTheme.Text = "Theme: Custom";
@@ -90,19 +133,16 @@ namespace Message_project.Forms
                 string fullSendedMessage;
                 string[] validatedPhoneNumbersArray = validatedPhoneNumbers.Split(",");
 
-
                 for (int i = 0; i < validatedPhoneNumbersArray.Length; i++)
                 {
-                    fullSendedMessage = $"Message ({validatedPhoneNumbersArray[i]}): {writedCustomMessage}";
-                    lbxResultOutput.Items.Add(fullSendedMessage);
+                    fullSendedMessage = $"Message ({validatedPhoneNumbersArray[i]}){sendDelayString}: {writedCustomMessage}";
+                    txtbResults.Text += fullSendedMessage + "\r\n";
                 }
-            }
-            else
-            {
-                // in case (pre-generated messages) entered phone numbers or theme are empty; (custom message) in case entered phone numbers are empty  
-                MessageBox.Show("There\'s something wrong with provided information, check it please.", "Error in provided information", btnOK, MessageBoxIcon.Error);
-            }
 
+                /* here is needed part of code that actually sends the messages using delay (inputedSendDelay)
+                    
+                */
+            }
         }
 
         private void btnPastePhoneNumbers_Click(object sender, EventArgs e)
